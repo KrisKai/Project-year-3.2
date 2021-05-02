@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Smart Home</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="nofitication">Notifications</string>
+    <string name="setting">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="connect_2_ur_home">Connect to your home</string>
+    <string name="edit_profile">Profile</string>
+    <string name="privacy">Privacy</string>
+    <string name="help_center">Help center</string>
+    <string name="abous_us">About us</string>
+    <string name="what_s_on_your_mind">Enter your query</string>
+</resources>
