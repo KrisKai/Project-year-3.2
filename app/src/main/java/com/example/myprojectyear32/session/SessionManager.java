@@ -18,6 +18,8 @@ public class SessionManager {
     public static final String KEY_USERNAME = "username";
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_GENDER = "gender";
+    public static final String KEY_CONNECTION = "connection";
+
 
     public SessionManager(Context context){
         preferences = context.getSharedPreferences(SHARED_PREF_NAME,Context.MODE_PRIVATE);
@@ -35,6 +37,13 @@ public class SessionManager {
         editor.putString(KEY_EMAIL,email);
         editor.putString(KEY_DOB,dob);
         editor.putString(KEY_GENDER,gender);
+        editor.putString(KEY_CONNECTION,"none");
+
+        editor.commit();
+    }
+
+    public void createConnection(String connectionCode){
+        editor.putString(KEY_CONNECTION, connectionCode);
 
         editor.commit();
     }
@@ -49,6 +58,7 @@ public class SessionManager {
         userData.put(KEY_EMAIL,preferences.getString(KEY_EMAIL,null));
         userData.put(KEY_DOB,preferences.getString(KEY_DOB,null));
         userData.put(KEY_GENDER,preferences.getString(KEY_GENDER,null));
+        userData.put(KEY_CONNECTION,preferences.getString(KEY_CONNECTION,null));
 
         return userData;
     }

@@ -42,6 +42,7 @@ public class HomeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         TextView nameTextView = view.findViewById(R.id.nameTV);
+
         SessionManager session = new SessionManager(getContext());
         HashMap<String,String> userDetails = session.getUserDetailFromSession();
         String name = userDetails.get(SessionManager.KEY_LASTNAME);

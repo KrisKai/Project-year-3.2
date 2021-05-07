@@ -85,9 +85,8 @@ public class LivingroomFragment extends Fragment {
             notification.setImage(R.mipmap.lighting);
             notification.setTime(date);
 
-
             reference.child(String.valueOf(maxID + 1)).setValue(notification);
-            Toast.makeText(getActivity(), notification.getDescription().toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), notification.getDescription(), Toast.LENGTH_SHORT).show();
         });
         fanCardView = (CardView) view.findViewById(R.id.fanLRCard);
         fanCardView.setOnClickListener(v -> {

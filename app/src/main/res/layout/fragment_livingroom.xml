@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <!-- TODO: Update blank fragment layout -->
@@ -18,7 +18,7 @@
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButtonLR"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
@@ -36,10 +36,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:text="Livingroom"
+            android:textColor="#77B2D9"
             android:textAlignment="center"
-            android:textSize="40dp"
+            android:textSize="40sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -84,8 +85,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:layout_marginTop="12dp"
+                        android:textColor="#77B2D9"
                         android:text="Lighting"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -115,8 +117,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
                         android:layout_marginTop="12dp"
+                        android:textColor="#77B2D9"
                         android:text="Fan"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -145,7 +148,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
+                        android:textColor="#77B2D9"
                         android:layout_marginTop="12dp"
                         android:text="Sensor"/>
                 </LinearLayout>
@@ -174,7 +178,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16dp"
+                        android:textSize="16sp"
+                        android:textColor="#77B2D9"
                         android:layout_marginTop="12dp"
                         android:text="Security"/>
                 </LinearLayout>

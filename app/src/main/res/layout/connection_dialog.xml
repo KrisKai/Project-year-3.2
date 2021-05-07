@@ -6,51 +6,39 @@
     android:padding="40dp">
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="249dp"
+        android:layout_height="73dp"
         android:layout_marginStart="30dp"
+        android:text="Connect to your home"
         android:textAlignment="center"
-        android:text="Update your profile"
         android:textSize="30sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="90dp"
-        android:text="Password"
+        android:layout_marginStart="10dp"
+        android:text="Input your home code"
         android:textStyle="bold"/>
 
     <EditText
-        android:id="@+id/password_checkDialog"
+        android:id="@+id/connect_connectDialog"
         android:layout_width="310dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="115dp"
-        android:inputType="textPassword"
+        android:layout_marginStart="10dp"
+        android:inputType="text"
         tools:ignore="LabelFor"
         android:autofillHints="password" />
 
-    <TextView
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/confirm_connectDialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="170dp"
-        android:text="Re-Enter Password"
-        android:textStyle="bold"/>
-
-    <EditText
-        android:id="@+id/rePassword_checkDialog"
-        android:layout_width="310dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="195dp"
-        android:autofillHints="repassword"
-        android:inputType="textPassword"
-        tools:ignore="LabelFor" />
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/confirm_checkDialog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
         android:layout_marginStart="90dp"
         android:text="Confirm"/>
 
