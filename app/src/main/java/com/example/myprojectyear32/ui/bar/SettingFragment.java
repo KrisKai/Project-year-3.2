@@ -1,6 +1,5 @@
 package com.example.myprojectyear32.ui.bar;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -18,11 +17,13 @@ import android.widget.TextView;
 import com.example.myprojectyear32.MainActivity;
 import com.example.myprojectyear32.R;
 import com.example.myprojectyear32.session.LoginActivity;
+import com.example.myprojectyear32.session.ProfileActivity;
 import com.example.myprojectyear32.session.SessionManager;
 
 public class SettingFragment extends Fragment {
 
     private TextView logoutTV;
+    private TextView profileTV;
     private ImageView returnBtn;
 
     public SettingFragment() {
@@ -47,6 +48,11 @@ public class SettingFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        profileTV = view.findViewById(R.id.profileTV);
+        profileTV.setOnClickListener(v ->{
+            Intent intent = new Intent(getContext(), ProfileActivity.class);
+            startActivity(intent);
+        });
         logoutTV = view.findViewById(R.id.logoutTV);
         logoutTV.setOnClickListener(v -> {
             SessionManager session = new SessionManager(getContext());
@@ -67,7 +73,7 @@ public class SettingFragment extends Fragment {
 
     private void setAnimationForLogout() {
         AlertDialog.Builder loadingDialog = new AlertDialog.Builder(getContext());
-        loadingDialog.setView(R.layout.test);
+        loadingDialog.setView(R.layout.logout_dialog);
         loadingDialog.setCancelable(false);
         AlertDialog alertDialog = loadingDialog.create();
         alertDialog.show();

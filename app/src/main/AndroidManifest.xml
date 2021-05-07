@@ -11,9 +11,10 @@
         android:roundIcon="@mipmap/home"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyProjectYear32">
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".session.LoginActivity"/>
-        <activity android:name=".session.SignupActivity"/>
+        <activity android:name=".session.ProfileActivity"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".session.LoginActivity" />
+        <activity android:name=".session.SignupActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

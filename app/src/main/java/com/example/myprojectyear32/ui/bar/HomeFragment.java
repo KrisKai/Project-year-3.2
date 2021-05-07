@@ -8,18 +8,17 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.myprojectyear32.R;
+import com.example.myprojectyear32.session.SessionManager;
 import com.example.myprojectyear32.ui.room.BathroomFragment;
 import com.example.myprojectyear32.ui.room.BedroomFragment;
 import com.example.myprojectyear32.ui.room.KitchenFragment;
 import com.example.myprojectyear32.ui.room.LivingroomFragment;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.HashMap;
+
 public class HomeFragment extends Fragment {
 
     CardView livingroomCardView;
@@ -29,13 +28,6 @@ public class HomeFragment extends Fragment {
 
     public HomeFragment() {
         // Required empty public constructor
-    }
-
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
@@ -48,6 +40,12 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        TextView nameTextView = view.findViewById(R.id.nameTV);
+        SessionManager session = new SessionManager(getContext());
+        HashMap<String,String> userDetails = session.getUserDetailFromSession();
+        String name = userDetails.get(SessionManager.KEY_LASTNAME);
+        nameTextView.setText(name);
 
         livingroomCardView = (CardView) view.findViewById(R.id.livingroomCard);
         livingroomCardView.setOnClickListener(new View.OnClickListener() {
