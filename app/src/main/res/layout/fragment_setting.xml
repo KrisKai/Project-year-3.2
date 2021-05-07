@@ -21,7 +21,6 @@
         app:layout_constraintVertical_bias="0.023" />
 
     <TextView
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/setting"
@@ -35,7 +34,6 @@
         app:layout_constraintVertical_bias="0.106" />
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -48,52 +46,74 @@
 
         <TextView
             android:id="@+id/profileTV"
+            android:background="@drawable/custom_setting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
-            android:paddingStart="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:paddingStart="10dp"
+            android:elevation="10dp"
             android:text="@string/edit_profile"
             android:textSize="20sp" />
 
         <TextView
+            android:background="@drawable/custom_setting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
-            android:paddingStart="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:paddingStart="10dp"
+            android:elevation="10dp"
             android:text="@string/connect_2_ur_home"
             android:textSize="20sp" />
 
 
         <TextView
+            android:background="@drawable/custom_setting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
-            android:paddingStart="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:paddingStart="10dp"
             android:text="@string/privacy"
-            android:textSize="20sp" />
+            android:textSize="20sp"/>
 
         <TextView
+            android:background="@drawable/custom_setting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
-            android:paddingStart="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:paddingStart="10dp"
+            android:elevation="10dp"
             android:text="@string/help_center"
             android:textSize="20sp" />
 
         <TextView
+            android:background="@drawable/custom_setting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
-            android:paddingStart="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:paddingStart="10dp"
             android:text="@string/abous_us"
             android:textSize="20sp" />
 
         <TextView
+            android:background="@drawable/custom_setting"
             android:id="@+id/logoutTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:paddingStart="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:elevation="10dp"
+            android:paddingStart="10dp"
             android:text="@string/logout"
             android:textSize="20sp" />
 

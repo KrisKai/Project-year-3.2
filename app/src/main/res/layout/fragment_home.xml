@@ -112,7 +112,7 @@
 
                     <ImageView
                         android:src="@mipmap/bedroom"
-                        android:alpha="0.5"
+                        android:alpha="0.4"
                         android:layout_width="80dp"
                         android:layout_height="80dp"/>
 
