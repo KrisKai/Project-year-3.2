@@ -1,5 +1,9 @@
 package com.example.myprojectyear32.data.chatbot;
 
+import android.content.Context;
+
+import com.example.myprojectyear32.data.mqtt.MQTTPublisher;
+
 import java.util.Random;
 
 public class BotResponse {
@@ -11,7 +15,7 @@ public class BotResponse {
         message = _message.toLowerCase();
     }
 
-    public static String basicResponses() {
+    public static String basicResponses(Context context) {
 
         final int min = 0;
         final int max = 2;
@@ -53,6 +57,7 @@ public class BotResponse {
             if(message.contains("phòng")){
                 outmessage = "Đang bật đèn..";
 
+                MQTTPublisher.Connect(context);
             }
             else {
                 outmessage = "Bạn muốn bật đèn phòng nào ?";
