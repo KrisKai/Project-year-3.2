@@ -104,12 +104,13 @@ public class LoginActivity extends AppCompatActivity {
                     String email = snapshot.child(username).child("email").getValue(String.class);
                     String phonenumber = snapshot.child(username).child("phoneNumber").getValue(String.class);
                     String dob = snapshot.child(username).child("DoB").getValue(String.class);
+                    String connectCode = snapshot.child(username).child("connectCode").getValue(String.class);
 
 
                     assert systemPassword != null;
                     if(systemPassword.equals(password)){
                         SessionManager session = new SessionManager(LoginActivity.this);
-                        session.createLoginSession(username, password,firstname, lastname, phonenumber, email, dob, gender);
+                        session.createLoginSession(username, password,firstname, lastname, phonenumber, email, dob, gender, connectCode);
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                     } else {

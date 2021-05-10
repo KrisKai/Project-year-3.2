@@ -27,7 +27,7 @@ public class SessionManager {
 
     }
 
-    public void createLoginSession(String userName, String passWord, String firstName, String lastName, String phoneNum, String email, String dob, String gender){
+    public void createLoginSession(String userName, String passWord, String firstName, String lastName, String phoneNum, String email, String dob, String gender, String connectCode){
         editor.putBoolean(IS_LOGIN,true);
         editor.putString(KEY_USERNAME,userName);
         editor.putString(KEY_PASSWORD,passWord);
@@ -37,7 +37,7 @@ public class SessionManager {
         editor.putString(KEY_EMAIL,email);
         editor.putString(KEY_DOB,dob);
         editor.putString(KEY_GENDER,gender);
-        editor.putString(KEY_CONNECTION,"none");
+        editor.putString(KEY_CONNECTION,connectCode);
 
         editor.commit();
     }

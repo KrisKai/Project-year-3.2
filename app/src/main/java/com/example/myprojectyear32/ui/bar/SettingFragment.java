@@ -23,6 +23,8 @@ import com.example.myprojectyear32.data.mqtt.MQTTPublisher;
 import com.example.myprojectyear32.session.LoginActivity;
 import com.example.myprojectyear32.session.ProfileActivity;
 import com.example.myprojectyear32.session.SessionManager;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
@@ -80,6 +82,8 @@ public class SettingFragment extends Fragment {
             SessionManager session = new SessionManager(getContext());
             HashMap<String,String> userDetails = session.getUserDetailFromSession();
             String connect = userDetails.get(SessionManager.KEY_CONNECTION);
+            String username = userDetails.get(SessionManager.KEY_USERNAME);
+            DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("User");
             if(!connect.isEmpty()){
                 mConnection.setText(connect);
             }
@@ -91,6 +95,7 @@ public class SettingFragment extends Fragment {
 
                     if(!connect.equals(mConnection.getText().toString())&&!mConnection.getText().equals("")){
                         session.createConnection(mConnection.getText().toString());
+                        reference.child(username).child("connectCode").setValue(mConnection.getText().toString());
                         MQTTPublisher.Connect(getContext(),mConnection.getText().toString());
                     }
                     if(mConnection.getText().equals("")) {
