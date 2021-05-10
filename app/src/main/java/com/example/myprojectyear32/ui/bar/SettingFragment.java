@@ -87,6 +87,8 @@ public class SettingFragment extends Fragment {
             if(!connect.isEmpty()){
                 mConnection.setText(connect);
             }
+            AlertDialog alertDialog = checkDialog.create();
+            alertDialog.show();
             Button mConfirm = ìnflate.findViewById(R.id.confirm_connectDialog);
             mConfirm.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -103,14 +105,13 @@ public class SettingFragment extends Fragment {
                     }else {
                         MQTTPublisher.Connect(getContext(),mConnection.getText().toString());
                     }
-
+                    alertDialog.dismiss();
                     Toast.makeText(getContext(),mConnection.getText().toString(),Toast.LENGTH_SHORT).show();
                 }
             });
 
 
-            AlertDialog alertDialog = checkDialog.create();
-            alertDialog.show();
+
         });
 
         return view;

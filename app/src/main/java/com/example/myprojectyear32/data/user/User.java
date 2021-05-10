@@ -10,6 +10,7 @@ public class User {
     private String phoneNumber;
     private String DoB;
     private String gender;
+    private String connect;
 
     public User(){}
 
@@ -75,5 +76,13 @@ public class User {
 
     public void setLastName(String LastName) {
         this.lastName = LastName;
+    }
+
+    public String getConnect() {
+        return connect;
+    }
+
+    public void setConnect(String Connect) {
+        this.connect = Connect;
     }
 }

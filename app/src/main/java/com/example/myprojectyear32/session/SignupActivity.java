@@ -169,6 +169,7 @@ public class SignupActivity extends AppCompatActivity {
                     user.setDoB("None");
                     user.setGender("None");
                     user.setPhoneNumber("None");
+                    user.setConnect("None");
 
                     reference.child(username).setValue(user);
                     Intent intent = new Intent(SignupActivity.this,LoginActivity.class);
