@@ -30,6 +30,12 @@ android {
     }
 }
 
+repositories {
+    maven {
+        url "https://repo.eclipse.org/content/repositories/paho-snapshots/"
+    }
+}
+
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.3.0'
@@ -49,5 +55,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     implementation platform('com.google.firebase:firebase-bom:27.0.0')
     implementation 'com.google.firebase:firebase-analytics'
+    compile 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.1.0'
+    compile 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
 }
 apply plugin: 'com.google.gms.google-services'

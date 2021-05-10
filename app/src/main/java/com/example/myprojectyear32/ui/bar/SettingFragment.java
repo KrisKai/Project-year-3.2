@@ -19,9 +19,12 @@ import android.widget.Toast;
 
 import com.example.myprojectyear32.MainActivity;
 import com.example.myprojectyear32.R;
+import com.example.myprojectyear32.data.mqtt.MQTTPublisher;
 import com.example.myprojectyear32.session.LoginActivity;
 import com.example.myprojectyear32.session.ProfileActivity;
 import com.example.myprojectyear32.session.SessionManager;
+
+import java.util.HashMap;
 
 public class SettingFragment extends Fragment {
 
@@ -74,13 +77,28 @@ public class SettingFragment extends Fragment {
             View ìnflate = getLayoutInflater().inflate(R.layout.connection_dialog,null);
             checkDialog.setView(ìnflate);
             EditText mConnection = ìnflate.findViewById(R.id.connect_connectDialog);
+            SessionManager session = new SessionManager(getContext());
+            HashMap<String,String> userDetails = session.getUserDetailFromSession();
+            String connect = userDetails.get(SessionManager.KEY_CONNECTION);
+            if(!connect.isEmpty()){
+                mConnection.setText(connect);
+            }
             Button mConfirm = ìnflate.findViewById(R.id.confirm_connectDialog);
             mConfirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //make the connection here
-                    SessionManager session = new SessionManager(getContext());
-                    session.createConnection(mConnection.getText().toString());
+
+                    if(!connect.equals(mConnection.getText().toString())&&!mConnection.getText().equals("")){
+                        session.createConnection(mConnection.getText().toString());
+                        MQTTPublisher.Connect(getContext(),mConnection.getText().toString());
+                    }
+                    if(mConnection.getText().equals("")) {
+                        Toast.makeText(getContext(),"Please type the Server IP",Toast.LENGTH_SHORT).show();
+                    }else {
+                        MQTTPublisher.Connect(getContext(),mConnection.getText().toString());
+                    }
+
                     Toast.makeText(getContext(),mConnection.getText().toString(),Toast.LENGTH_SHORT).show();
                 }
             });
