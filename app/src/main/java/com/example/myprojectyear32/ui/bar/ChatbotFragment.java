@@ -100,7 +100,7 @@ public class ChatbotFragment extends Fragment {
             recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
             storeChat(textView1.getText().toString(),storedStatus);
             BotResponse botResponse = new BotResponse(storedStr);
-            String response = botResponse.basicResponses();
+            String response = botResponse.basicResponses(getContext());
             botResponse(response);
             speak(response);
         });
@@ -112,7 +112,7 @@ public class ChatbotFragment extends Fragment {
             messageArrayList.add(inputMessage);
             recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
             BotResponse botResponse = new BotResponse(textView2.getText().toString());
-            String response = botResponse.basicResponses();
+            String response = botResponse.basicResponses(getContext());
             botResponse(response);
             speak(response);
         });
@@ -124,7 +124,7 @@ public class ChatbotFragment extends Fragment {
             messageArrayList.add(inputMessage);
             recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
             BotResponse botResponse = new BotResponse(textView3.getText().toString());
-            String response = botResponse.basicResponses();
+            String response = botResponse.basicResponses(getContext());
             botResponse(response);
             speak(response);
         });
@@ -177,7 +177,7 @@ public class ChatbotFragment extends Fragment {
             storeChat(inputmessage,storedStatus);
             recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
             BotResponse botResponse = new BotResponse(storedStr);
-            String response = botResponse.basicResponses();
+            String response = botResponse.basicResponses(getContext());
             botResponse(response);
             speak(response);
         } else {
@@ -214,7 +214,7 @@ public class ChatbotFragment extends Fragment {
                     recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
                     storeChat(result.get(0),storedStatus);
                     BotResponse botResponse = new BotResponse(storedStr);
-                    String response = botResponse.basicResponses();
+                    String response = botResponse.basicResponses(getContext());
                     botResponse(response);
                     speak(response);
 
