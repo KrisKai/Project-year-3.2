@@ -2,8 +2,11 @@ package com.example.myprojectyear32.data.chatbot;
 
 import android.content.Context;
 
+import com.example.myprojectyear32.MainActivity;
 import com.example.myprojectyear32.data.mqtt.MQTTPublisher;
+import com.example.myprojectyear32.session.SessionManager;
 
+import java.util.HashMap;
 import java.util.Random;
 
 public class BotResponse {
@@ -16,7 +19,9 @@ public class BotResponse {
     }
 
     public static String basicResponses(Context context) {
-
+        SessionManager session = new SessionManager(context);
+        HashMap<String,String> userDetails = session.getUserDetailFromSession();
+        String connect = userDetails.get(SessionManager.KEY_LASTNAME);
         final int min = 0;
         final int max = 2;
         final int random = new Random().nextInt((max - min) + 1) + min;
@@ -56,7 +61,7 @@ public class BotResponse {
 //
             if(message.contains("phòng")){
                 outmessage = "Đang bật đèn..";
-
+                MQTTPublisher.Connect(context,connect);
 //                MQTTPublisher.Connect(context);
             }
             else {

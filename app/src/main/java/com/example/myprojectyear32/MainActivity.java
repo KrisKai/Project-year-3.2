@@ -28,14 +28,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         SessionManager session = new SessionManager(MainActivity.this);
         if(session.checkLogin()){
-            HashMap<String,String> userDetails = session.getUserDetailFromSession();
-            String connect = userDetails.get(SessionManager.KEY_LASTNAME);
-            assert connect != null;
-            if(!connect.equals("None")){
-                MQTTPublisher.Connect(MainActivity.this,connect);
-            } else {
-                Toast.makeText(MainActivity.this,"please connect to your home",Toast.LENGTH_SHORT).show();
-            }
             loadFragment(new HomeFragment());
             BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigation);
             bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
