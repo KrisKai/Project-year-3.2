@@ -5,14 +5,21 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.events.Publisher;
+
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+
+import java.io.UnsupportedEncodingException;
 
 public class MQTTPublisher extends AppCompatActivity {
+    static MqttAndroidClient client;
+
     public static void Connect(Context context, String serverIP) {
         MqttConnectOptions options = new MqttConnectOptions();
         options.setUserName("Henefisa103");
@@ -20,7 +27,7 @@ public class MQTTPublisher extends AppCompatActivity {
         String clientId = MqttClient.generateClientId();
         
 //        192.168.1.200:1883
-        MqttAndroidClient client =
+        client =
                 new MqttAndroidClient(context, "tcp://"+serverIP,
                         clientId);
 
@@ -42,6 +49,21 @@ public class MQTTPublisher extends AppCompatActivity {
             });
         } catch (MqttException e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void Publisher(String msg){
+        if (client.isConnected()){
+            String topic = "living";
+            String payload = msg;
+            byte[] encodedPayload = new byte[0];
+            try {
+                encodedPayload = payload.getBytes("UTF-8");
+                MqttMessage message = new MqttMessage(encodedPayload);
+                client.publish(topic, message);
+            } catch (UnsupportedEncodingException | MqttException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
