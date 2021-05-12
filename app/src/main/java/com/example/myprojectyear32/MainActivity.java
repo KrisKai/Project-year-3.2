@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import com.example.myprojectyear32.data.mqtt.MQTTPublisher;
 import com.example.myprojectyear32.session.LoginActivity;
 import com.example.myprojectyear32.session.SessionManager;
 import com.example.myprojectyear32.ui.bar.ChatbotFragment;
@@ -15,6 +16,8 @@ import com.example.myprojectyear32.ui.bar.HomeFragment;
 import com.example.myprojectyear32.ui.bar.NotificationFragment;
 import com.example.myprojectyear32.ui.bar.SettingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         SessionManager session = new SessionManager(MainActivity.this);
         if(session.checkLogin()){
+            HashMap<String,String> userDetails = session.getUserDetailFromSession();
+            String connect = userDetails.get(SessionManager.KEY_LASTNAME);
+            if(!connect.equals("None")){
+                MQTTPublisher mqttPublisher = new MQTTPublisher();
+                MQTTPublisher.Connect(MainActivity.this);
+            }
             loadFragment(new HomeFragment());
             BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigation);
             bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
