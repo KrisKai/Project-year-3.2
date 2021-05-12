@@ -9,7 +9,9 @@ import com.google.firebase.events.Publisher;
 
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -53,7 +55,7 @@ public class MQTTPublisher extends AppCompatActivity {
     }
 
     public static void Publisher(String msg){
-        if (client.isConnected()){
+//        if (client.isConnected()){
             String topic = "living";
             String payload = msg;
             byte[] encodedPayload = new byte[0];
@@ -64,6 +66,48 @@ public class MQTTPublisher extends AppCompatActivity {
             } catch (UnsupportedEncodingException | MqttException e) {
                 e.printStackTrace();
             }
+//        }
+    }
+
+    public static void Subcriber(String topic){
+        int qos = 1;
+        try {
+            IMqttToken subToken = client.subscribe(topic, qos);
+            subToken.setActionCallback(new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken) {
+                    // The message was published
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken,
+                                      Throwable exception) {
+                    // The subscription could not be performed, maybe the user was not
+                    // authorized to subscribe on the specified topic e.g. using wildcards
+
+                }
+            });
+        } catch (MqttException e) {
+            e.printStackTrace();
         }
+    }
+
+    public static void MessageOutput(){
+        client.setCallback(new MqttCallback() {
+            @Override
+            public void connectionLost(Throwable cause) {
+
+            }
+
+            @Override
+            public void messageArrived(String topic, MqttMessage message) throws Exception {
+                Log.d("mqtt", message.toString());
+            }
+
+            @Override
+            public void deliveryComplete(IMqttDeliveryToken token) {
+
+            }
+        });
     }
 }
