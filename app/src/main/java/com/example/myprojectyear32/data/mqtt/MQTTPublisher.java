@@ -13,14 +13,16 @@ import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 
 public class MQTTPublisher extends AppCompatActivity {
-    public static void Connect(Context context) {
-        Log.d("mqtt", context.toString());
+    static MqttAndroidClient client;
+    public static void Connect(Context context, String serverIP) {
         MqttConnectOptions options = new MqttConnectOptions();
         options.setUserName("Henefisa103");
         options.setPassword("henefisa103".toCharArray());
         String clientId = MqttClient.generateClientId();
-        MqttAndroidClient client =
-                new MqttAndroidClient(context, "tcp://192.168.1.16:1883",
+
+//        192.168.1.200:1883
+        client =
+                new MqttAndroidClient(context, "tcp://"+serverIP,
                         clientId);
 
         try {

@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.myprojectyear32.data.mqtt.MQTTPublisher;
 import com.example.myprojectyear32.session.LoginActivity;
@@ -29,9 +30,11 @@ public class MainActivity extends AppCompatActivity {
         if(session.checkLogin()){
             HashMap<String,String> userDetails = session.getUserDetailFromSession();
             String connect = userDetails.get(SessionManager.KEY_LASTNAME);
+            assert connect != null;
             if(!connect.equals("None")){
-                MQTTPublisher mqttPublisher = new MQTTPublisher();
-                MQTTPublisher.Connect(MainActivity.this);
+                MQTTPublisher.Connect(MainActivity.this,connect);
+            } else {
+                Toast.makeText(MainActivity.this,"please connect to your home",Toast.LENGTH_SHORT).show();
             }
             loadFragment(new HomeFragment());
             BottomNavigationView bottomNavigationView = (BottomNavigationView)findViewById(R.id.navigation);
