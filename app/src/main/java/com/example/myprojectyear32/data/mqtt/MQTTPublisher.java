@@ -23,39 +23,45 @@ public class MQTTPublisher extends AppCompatActivity {
     static MqttAndroidClient client;
 
     public static void Connect(Context context, String serverIP) {
-        MqttConnectOptions options = new MqttConnectOptions();
-        options.setUserName("Henefisa103");
-        options.setPassword("henefisa103".toCharArray());
-        String clientId = MqttClient.generateClientId();
-        
+        if (client == null) {
+            MqttConnectOptions options = new MqttConnectOptions();
+            options.setUserName("Henefisa103");
+            options.setPassword("henefisa103".toCharArray());
+            String clientId = MqttClient.generateClientId();
+
 //        192.168.1.200:1883
-        client =
-                new MqttAndroidClient(context, "tcp://"+serverIP,
-                        clientId);
+            client =
+                    new MqttAndroidClient(context, "tcp://" + serverIP,
+                            clientId);
 
-        try {
-            IMqttToken token = client.connect(options);
-            token.setActionCallback(new IMqttActionListener() {
-                @Override
-                public void onSuccess(IMqttToken asyncActionToken) {
-                    // We are connected
-                    Log.d("mqtt", "onSuccess");
+            if (!client.isConnected()) {
+                try {
+                    IMqttToken token = client.connect(options);
+                    token.setActionCallback(new IMqttActionListener() {
+                        @Override
+                        public void onSuccess(IMqttToken asyncActionToken) {
+                            // We are connected
+                            Log.d("mqtt", "onSuccess Con");
+                        }
+
+                        @Override
+                        public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                            // Something went wrong e.gw    . connection timeout or firewall problems
+                            Log.d("mqtt", "onFailure Con");
+
+                        }
+                    });
+                } catch (MqttException e) {
+                    e.printStackTrace();
                 }
-
-                @Override
-                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    // Something went wrong e.gw    . connection timeout or firewall problems
-                    Log.d("mqtt", "onFailure");
-
-                }
-            });
-        } catch (MqttException e) {
-            e.printStackTrace();
+            } else {
+                Log.d("mqtt", "Connected");
+            }
         }
     }
 
     public static void Publisher(String msg){
-//        if (client.isConnected()){
+        if (client.isConnected()) {
             String topic = "living";
             String payload = msg;
             byte[] encodedPayload = new byte[0];
@@ -63,10 +69,14 @@ public class MQTTPublisher extends AppCompatActivity {
                 encodedPayload = payload.getBytes("UTF-8");
                 MqttMessage message = new MqttMessage(encodedPayload);
                 client.publish(topic, message);
+                Log.d("mqtt", "onSuccess Pub");
             } catch (UnsupportedEncodingException | MqttException e) {
                 e.printStackTrace();
+                Log.d("mqtt", "onFailure Pub");
             }
-//        }
+        } else {
+            Log.d("mqtt", "onFailure Pub-Con");
+        }
     }
 
     public static void Subcriber(String topic){
@@ -77,6 +87,7 @@ public class MQTTPublisher extends AppCompatActivity {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
                     // The message was published
+                    Log.d("mqtt", "onSuccess Sub");
                 }
 
                 @Override
@@ -84,7 +95,7 @@ public class MQTTPublisher extends AppCompatActivity {
                                       Throwable exception) {
                     // The subscription could not be performed, maybe the user was not
                     // authorized to subscribe on the specified topic e.g. using wildcards
-
+                    Log.d("mqtt", "onFailure Sub");
                 }
             });
         } catch (MqttException e) {
