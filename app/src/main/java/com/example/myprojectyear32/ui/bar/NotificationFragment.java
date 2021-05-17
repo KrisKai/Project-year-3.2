@@ -19,6 +19,7 @@ import com.example.myprojectyear32.MainActivity;
 import com.example.myprojectyear32.R;
 import com.example.myprojectyear32.data.notification.Notification;
 import com.example.myprojectyear32.data.notification.NotificationAdapter;
+import com.example.myprojectyear32.session.SessionManager;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -27,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -37,6 +39,7 @@ public class NotificationFragment extends Fragment {
     protected NotificationAdapter notificationAdapter;
     private DatabaseReference reference;
     private ImageView returnBtn;
+    String userName;
 
     public NotificationFragment() {
         // Required empty public constructor
@@ -56,6 +59,10 @@ public class NotificationFragment extends Fragment {
             }
         });
 
+        SessionManager session = new SessionManager(getContext());
+        HashMap<String,String> userDetails = session.getUserDetailFromSession();
+        userName = userDetails.get(SessionManager.KEY_USERNAME);
+
         recyclerView = (RecyclerView)view.findViewById(R.id.notification_list);
 
         notificationList = new ArrayList<>();
@@ -71,7 +78,7 @@ public class NotificationFragment extends Fragment {
     }
 
     public void addNotification() {
-        reference = FirebaseDatabase.getInstance().getReference().child("Notification");
+        reference = FirebaseDatabase.getInstance().getReference().child("User").child(userName).child("Notification");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
