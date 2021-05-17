@@ -58,9 +58,9 @@ public class BotResponse {
                 outmessage = "Đang bật đèn..";
 
 //                MQTTPublisher.Connect(context, "192.168.1.200:1883");
-//                MQTTPublisher.Publisher("testpub");
-                MQTTPublisher.MessageOutput();
-                MQTTPublisher.Subcriber("android_receiver");
+                MQTTPublisher.Publisher("testpub");
+//                MQTTPublisher.MessageOutput();
+//                MQTTPublisher.Subcriber("android_receiver");
             }
             else {
                 outmessage = "Bạn muốn bật đèn phòng nào ?";
