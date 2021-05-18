@@ -16,7 +16,7 @@
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButtonLR"
+            android:id="@+id/floatingActionButtonBaR"
             android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
             android:layout_width="wrap_content"
@@ -92,7 +92,7 @@
                         android:text="Light bulb"/>
 
                     <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/lightLRswitch"
+                        android:id="@+id/lightBaRswitch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
@@ -135,7 +135,7 @@
                         android:text="Fan"/>
 
                     <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/fanLRswitch"
+                        android:id="@+id/fanBaRswitch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
@@ -178,7 +178,7 @@
                         android:text="Sensor"/>
 
                     <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/sensorLRswitch"
+                        android:id="@+id/sensorBaRswitch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:thumb="@drawable/custom_thumb"
@@ -221,7 +221,7 @@
                         android:text="Security"/>
 
                     <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/doorLRswitch"
+                        android:id="@+id/doorBaRswitch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:thumb="@drawable/custom_thumb"
