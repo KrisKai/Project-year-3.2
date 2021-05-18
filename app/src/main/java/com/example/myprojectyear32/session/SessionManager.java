@@ -19,6 +19,9 @@ public class SessionManager {
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_GENDER = "gender";
     public static final String KEY_CONNECTION = "connection";
+    public static final String KEY_LIGHTINGLR = "lightLR";
+    public static final String KEY_FANLR = "fanLR";
+    public static final String KEY_DOORLR = "doorLR";
 
 
     public SessionManager(Context context){
@@ -38,13 +41,19 @@ public class SessionManager {
         editor.putString(KEY_DOB,dob);
         editor.putString(KEY_GENDER,gender);
         editor.putString(KEY_CONNECTION,connectCode);
-
         editor.commit();
     }
 
     public void createConnection(String connectionCode){
         editor.putString(KEY_CONNECTION, connectionCode);
 
+        editor.commit();
+    }
+
+    public void createStatus(String doorLR, String fanLR, String lightingLR){
+        editor.putString(KEY_DOORLR,doorLR);
+        editor.putString(KEY_FANLR,fanLR);
+        editor.putString(KEY_LIGHTINGLR,lightingLR);
         editor.commit();
     }
 
@@ -59,6 +68,9 @@ public class SessionManager {
         userData.put(KEY_DOB,preferences.getString(KEY_DOB,null));
         userData.put(KEY_GENDER,preferences.getString(KEY_GENDER,null));
         userData.put(KEY_CONNECTION,preferences.getString(KEY_CONNECTION,null));
+        userData.put(KEY_DOORLR,preferences.getString(KEY_DOORLR,null));
+        userData.put(KEY_LIGHTINGLR,preferences.getString(KEY_LIGHTINGLR,null));
+        userData.put(KEY_FANLR,preferences.getString(KEY_FANLR,null));
 
         return userData;
     }

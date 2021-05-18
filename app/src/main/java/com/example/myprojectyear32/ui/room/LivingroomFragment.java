@@ -37,6 +37,9 @@ public class LivingroomFragment extends Fragment {
     SwitchCompat mLightBulb, mFan, mSensor, mDoor;
     private String date;
     private long maxID=0;
+    private boolean doorState = false;
+    private boolean fanState = false;
+    private boolean lightBulbState = false;
 
     public LivingroomFragment() {
         // Required empty public constructor
@@ -64,6 +67,106 @@ public class LivingroomFragment extends Fragment {
         SessionManager session = new SessionManager(getContext());
         HashMap<String,String> userDetails = session.getUserDetailFromSession();
         String userName = userDetails.get(SessionManager.KEY_USERNAME);
+        String mLightBulbStatus = userDetails.get(SessionManager.KEY_LIGHTINGLR);
+        String mDoorStatus = userDetails.get(SessionManager.KEY_DOORLR);
+        String mFanStatus = userDetails.get(SessionManager.KEY_FANLR);
+
+        mLightBulb = view.findViewById(R.id.lightLRswitch);
+        if(mLightBulbStatus.equals("True")){
+            mLightBulb.setChecked(true);
+            lightBulbState = true;
+        }else {
+            mLightBulb.setChecked(false);
+            lightBulbState = false;
+        }
+
+        mFan = view.findViewById(R.id.fanLRswitch);
+        if(mFanStatus.equals("True")){
+            mFan.setChecked(true);
+            fanState = true;
+        }else {
+            mFan.setChecked(false);
+            fanState = false;
+        }
+        mDoor = view.findViewById(R.id.doorLRswitch);
+        if(mDoorStatus.equals("True")){
+            mDoor.setChecked(true);
+            doorState = true;
+        }else {
+            mDoor.setChecked(false);
+            doorState = false;
+        }
+
+        mLightBulb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(!lightBulbState){
+                    if(isChecked){
+                        notification = new Notification();
+                        notification.setDescription("Bật đèn phòng khách.");
+                        notification.setImage(R.mipmap.lighting);
+                        notification.setTime(date);
+
+                        notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
+                        Toast.makeText(getActivity(), notification.getDescription(), Toast.LENGTH_SHORT).show();
+                        statusReference.child("lighting").setValue("True");
+                    } else {
+                        statusReference.child("lighting").setValue("False");
+                        Toast.makeText(getActivity(), "Tắt đèn phòng khách", Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    lightBulbState = false;
+                }
+
+            }
+        });
+        mFan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(!fanState){
+                    if(isChecked){
+                        notification = new Notification();
+                        notification.setDescription("Bật quạt phòng khách.");
+                        notification.setImage(R.mipmap.fan);
+                        notification.setTime(date);
+
+                        notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
+                        Toast.makeText(getActivity(), notification.getDescription(), Toast.LENGTH_SHORT).show();
+                        statusReference.child("fan").setValue("True");
+                    } else {
+                        statusReference.child("fan").setValue("False");
+                        Toast.makeText(getActivity(), "Tắt quạt phòng khách", Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    fanState = false;
+                }
+
+            }
+        });
+
+        mDoor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(!doorState){
+                    if(isChecked){
+                        notification = new Notification();
+                        notification.setDescription("Mở cửa phòng khách.");
+                        notification.setImage(R.mipmap.security);
+                        notification.setTime(date);
+
+                        notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
+                        Toast.makeText(getActivity(), notification.getDescription(), Toast.LENGTH_SHORT).show();
+                        statusReference.child("door").setValue("True");
+                    } else {
+                        Toast.makeText(getActivity(), "Đóng cửa phòng khách", Toast.LENGTH_SHORT).show();
+                        statusReference.child("door").setValue("False");
+                    }
+                } else {
+                    doorState = false;
+                }
+
+            }
+        });
 
         notiReference = FirebaseDatabase.getInstance().getReference().child("User").child(userName).child("Notification");
 
@@ -83,60 +186,6 @@ public class LivingroomFragment extends Fragment {
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         date = dateFormat.format(calendar.getTime());
-        mLightBulb = view.findViewById(R.id.lightLRswitch);
-        mLightBulb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    notification = new Notification();
-                    notification.setDescription("Bật đèn phòng khách.");
-                    notification.setImage(R.mipmap.lighting);
-                    notification.setTime(date);
-
-                    notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
-                    Toast.makeText(getActivity(), notification.getDescription(), Toast.LENGTH_SHORT).show();
-                    statusReference.child("lighting").setValue("True");
-                } else {
-                    statusReference.child("lighting").setValue("False");
-                }
-            }
-        });
-        mFan = view.findViewById(R.id.fanLRswitch);
-        mFan.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    notification = new Notification();
-                    notification.setDescription("Bật quạt phòng khách.");
-                    notification.setImage(R.mipmap.fan);
-                    notification.setTime(date);
-
-                    notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
-                    Toast.makeText(getActivity(), notification.getDescription(), Toast.LENGTH_SHORT).show();
-                    statusReference.child("fan").setValue("True");
-                } else {
-                    statusReference.child("fan").setValue("False");
-                }
-            }
-        });
-        mDoor = view.findViewById(R.id.doorLRswitch);
-        mDoor.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    notification = new Notification();
-                    notification.setDescription("Mở cửa phòng khách.");
-                    notification.setImage(R.mipmap.security);
-                    notification.setTime(date);
-
-                    notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
-                    Toast.makeText(getActivity(), notification.getDescription(), Toast.LENGTH_SHORT).show();
-                    statusReference.child("door").setValue("True");
-                } else {
-                    statusReference.child("door").setValue("False");
-                }
-            }
-        });
 
         return view;
     }

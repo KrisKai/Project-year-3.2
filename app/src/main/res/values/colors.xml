@@ -12,5 +12,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="bg_bubble_self">#62caa6</color>
     <color name="bg_bubble_watbot">#ecf0f1</color>
-    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#FFBB86FC</color>
+    <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#68A7D9</color>
 </resources>

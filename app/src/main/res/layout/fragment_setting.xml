@@ -46,7 +46,6 @@
 
         <TextView
             android:id="@+id/profileTV"
-            android:background="@drawable/custom_setting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
@@ -59,7 +58,6 @@
 
         <TextView
             android:id="@+id/connectionTV"
-            android:background="@drawable/custom_setting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
@@ -72,7 +70,6 @@
 
 
         <TextView
-            android:background="@drawable/custom_setting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
@@ -83,7 +80,6 @@
             android:textSize="20sp"/>
 
         <TextView
-            android:background="@drawable/custom_setting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
@@ -95,7 +91,6 @@
             android:textSize="20sp" />
 
         <TextView
-            android:background="@drawable/custom_setting"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="30dp"
@@ -106,7 +101,6 @@
             android:textSize="20sp" />
 
         <TextView
-            android:background="@drawable/custom_setting"
             android:id="@+id/logoutTV"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

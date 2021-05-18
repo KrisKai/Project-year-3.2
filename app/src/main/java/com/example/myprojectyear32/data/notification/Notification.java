@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Notification{
-    private String mDescription =  "test";
+    private String mDescription;
     private String mTime;
     private int mImage;
 
