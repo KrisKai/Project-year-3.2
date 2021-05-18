@@ -5,20 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/bedroom_bg"
-    android:orientation="vertical"
     tools:context=".ui.room.BedroomFragment">
-
-    <!-- TODO: Update blank fragment layout -->
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- TODO: Update blank fragment layout -->
+
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButtonBR"
+            android:id="@+id/floatingActionButtonLR"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
@@ -29,16 +29,19 @@
             app:layout_constraintHorizontal_bias="0.045"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.023" />
+            app:layout_constraintVertical_bias="0.023"
+            android:focusable="true" />
+
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp"
             android:text="Bedroom"
+            android:textColor="#77B2D9"
             android:textAlignment="center"
-            android:textSize="40dp"
+            android:textSize="40sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -47,20 +50,20 @@
             app:layout_constraintVertical_bias="0.206" />
 
         <GridLayout
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="120dp"
             android:columnCount="2"
             android:rowCount="2"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:alignmentMode="alignMargins"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="3">
 
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/lightingCardBR"
-                android:layout_width="wrap_content"
+                android:id="@+id/lightingLRCard"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
@@ -72,60 +75,82 @@
                 <LinearLayout
                     android:orientation="vertical"
                     android:padding="16dp"
-                    android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <ImageView
+                        android:layout_marginTop="10dp"
                         android:src="@mipmap/lighting"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"/>
-
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16dp"
-                        android:layout_marginTop="12dp"
-                        android:text="Lighting"/>
+                        android:textSize="16sp"
+                        android:padding="5dp"
+                        android:textColor="#77B2D9"
+                        android:text="Light bulb"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/lightLRswitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:thumb="@drawable/custom_thumb"
+                        app:track="@drawable/custom_track"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/fanBRCard"
-                android:layout_width="wrap_content"
+                android:id="@+id/fanLRCard"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
+                app:cardElevation="6dp"
                 android:layout_marginBottom="30dp"
-                app:cardElevation="6dp"
                 app:cardCornerRadius="12dp"
                 android:layout_margin="12dp">
 
                 <LinearLayout
                     android:orientation="vertical"
                     android:padding="16dp"
-                    android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <ImageView
+                        android:layout_marginTop="10dp"
                         android:src="@mipmap/fan"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"/>
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16dp"
-                        android:layout_marginTop="12dp"
+                        android:textSize="16sp"
+                        android:padding="5dp"
+                        android:textColor="#77B2D9"
                         android:text="Fan"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/fanLRswitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="5dp"
+                        android:thumb="@drawable/custom_thumb"
+                        app:track="@drawable/custom_track"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+
                 </LinearLayout>
+
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/sensorCardBR"
-                android:layout_width="wrap_content"
+                android:id="@+id/sensorLRCard"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
@@ -136,29 +161,38 @@
                 <LinearLayout
                     android:orientation="vertical"
                     android:padding="16dp"
-                    android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <ImageView
+                        android:layout_marginTop="10dp"
                         android:src="@mipmap/sensor"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"/>
-
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16dp"
-                        android:layout_marginTop="12dp"
+                        android:textSize="16sp"
+                        android:textColor="#77B2D9"
+                        android:padding="5dp"
                         android:text="Sensor"/>
 
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/sensorLRswitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:thumb="@drawable/custom_thumb"
+                        android:padding="5dp"
+                        app:track="@drawable/custom_track"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/securityCardBR"
-                android:layout_width="wrap_content"
+                android:id="@+id/securityLRCard"
+                android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
                 android:layout_rowWeight="1"
@@ -169,21 +203,31 @@
                 <LinearLayout
                     android:orientation="vertical"
                     android:padding="16dp"
-                    android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
                     <ImageView
+                        android:layout_marginTop="10dp"
                         android:src="@mipmap/security"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"/>
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="16dp"
-                        android:layout_marginTop="12dp"
+                        android:textSize="16sp"
+                        android:textColor="#77B2D9"
+                        android:padding="5dp"
                         android:text="Security"/>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/doorLRswitch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:thumb="@drawable/custom_thumb"
+                        android:padding="5dp"
+                        app:track="@drawable/custom_track"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
                 </LinearLayout>
 
@@ -192,5 +236,4 @@
         </GridLayout>
 
     </LinearLayout>
-
 </ScrollView>
