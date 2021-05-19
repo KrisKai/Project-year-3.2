@@ -29,13 +29,10 @@ public class SplashActivity extends AppCompatActivity {
         splashTV = findViewById(R.id.splashTV);
         splashTV.setAnimation(topAni);
         splashIV.setAnimation(topAni);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        new Handler().postDelayed(() -> {
+            Intent intent = new Intent(SplashActivity.this,LoginActivity.class);
+            startActivity(intent);
+            finish();
         },SPLASH_SCREEN);
     }
 }

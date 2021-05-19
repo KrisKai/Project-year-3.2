@@ -1,7 +1,6 @@
 package com.example.myprojectyear32.ui.bar;
 
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -37,15 +36,11 @@ public class ChatbotFragment extends Fragment {
     private ChatAdapter mAdapter;
     private ArrayList messageArrayList;
     private EditText inputMessage;
-    private ImageButton btnSend;
-    private ImageButton btnRecord;
     private boolean initialRequest;
     private TextToSpeech textToSpeech;
-    private CardView cardView1, cardView2, cardView3;
     private TextView textView1, textView2, textView3;
     private String storedStr;
     private boolean storedStatus = false;
-    private ImageView returnBtn;
 
     public ChatbotFragment() {
         // Required empty public constructor
@@ -63,14 +58,11 @@ public class ChatbotFragment extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_chatbot, container, false);
         inputMessage = view.findViewById(R.id.message);
-        btnSend = view.findViewById(R.id.btn_send);
-        returnBtn = view.findViewById(R.id.returnCB);
-        returnBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(),MainActivity.class);
-                startActivity(intent);
-            }
+        ImageButton btnSend = view.findViewById(R.id.btn_send);
+        ImageView returnBtn = view.findViewById(R.id.returnCB);
+        returnBtn.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(),MainActivity.class);
+            startActivity(intent);
         });
         recyclerView = view.findViewById(R.id.recycler_view);
 
@@ -85,12 +77,12 @@ public class ChatbotFragment extends Fragment {
         this.inputMessage.setText("");
         this.initialRequest = true;
 
-        cardView1 = (CardView) view.findViewById(R.id.recommendation1);
-        cardView2 = (CardView) view.findViewById(R.id.recommendation2);
-        cardView3 = (CardView) view.findViewById(R.id.recommendation3);
-        textView1 = (TextView) view.findViewById(R.id.recommendationText1);
-        textView2 = (TextView) view.findViewById(R.id.recommendationText2);
-        textView3 = (TextView) view.findViewById(R.id.recommendationText3);
+        CardView cardView1 = view.findViewById(R.id.recommendation1);
+        CardView cardView2 = view.findViewById(R.id.recommendation2);
+        CardView cardView3 = view.findViewById(R.id.recommendation3);
+        textView1 = view.findViewById(R.id.recommendationText1);
+        textView2 = view.findViewById(R.id.recommendationText2);
+        textView3 = view.findViewById(R.id.recommendationText3);
 
         cardView1.setOnClickListener(v -> {
             Message inputMessage = new Message();
@@ -129,7 +121,7 @@ public class ChatbotFragment extends Fragment {
             speak(response);
         });
 
-        btnRecord = (ImageButton)view.findViewById(R.id.btn_record) ;
+        ImageButton btnRecord = (ImageButton) view.findViewById(R.id.btn_record);
         btnRecord.setOnClickListener(v -> {
             Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
@@ -164,7 +156,6 @@ public class ChatbotFragment extends Fragment {
             textToSpeech.speak(message,TextToSpeech.QUEUE_FLUSH,null);
         }
     }
-    ;
     // Sending a message to Watson Assistant Service
     private void sendMessage() {
 
@@ -225,7 +216,7 @@ public class ChatbotFragment extends Fragment {
     }
 
     private void storeChat(String message, boolean status){
-        if(status==false){
+        if(!status){
             if(message.contains("bật")&&message.contains("đèn")&&!message.contains("phòng")){
                 storedStr = message;
                 storedStatus = true;

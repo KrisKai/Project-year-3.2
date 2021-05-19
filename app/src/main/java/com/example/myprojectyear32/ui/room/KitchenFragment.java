@@ -2,7 +2,6 @@ package com.example.myprojectyear32.ui.room;
 
 import android.os.Bundle;
 
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -13,38 +12,16 @@ import com.example.myprojectyear32.R;
 import com.example.myprojectyear32.ui.bar.HomeFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link KitchenFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.Objects;
+
 public class KitchenFragment extends Fragment {
 
     FloatingActionButton floatingActionButton;
-    CardView lightingCardView;
-    CardView sensorCardView;
-    CardView securityCardView;
-    CardView voiceCardView;
 
     public KitchenFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment KitchenFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static KitchenFragment newInstance(String param1, String param2) {
-        KitchenFragment fragment = new KitchenFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,16 +33,13 @@ public class KitchenFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_kitchen, container, false);
-        floatingActionButton = (FloatingActionButton)view.findViewById(R.id.floatingActionButtonKC);
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                HomeFragment nextFrag= new HomeFragment();
-                getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.frame_container, nextFrag)
-                        .addToBackStack(null)
-                        .commit();
-            }
+        floatingActionButton = view.findViewById(R.id.floatingActionButtonKC);
+        floatingActionButton.setOnClickListener(v -> {
+            HomeFragment nextFrag= new HomeFragment();
+            Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.frame_container, nextFrag)
+                    .addToBackStack(null)
+                    .commit();
         });
 
         return view;

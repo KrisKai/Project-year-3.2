@@ -84,9 +84,7 @@ public class SettingFragment extends Fragment {
             String connect = userDetails.get(SessionManager.KEY_CONNECTION);
             String username = userDetails.get(SessionManager.KEY_USERNAME);
             DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("User");
-            if(!connect.isEmpty()){
-                mConnection.setText(connect);
-            }
+            mConnection.setText(connect);
             AlertDialog alertDialog = checkDialog.create();
             alertDialog.show();
             Button mConfirm = ìnflate.findViewById(R.id.confirm_connectDialog);

@@ -12,12 +12,6 @@ public class Message implements Serializable {
         this.type = Type.TEXT;
     }
 
-    public Message(String id, String message) {
-        this.id = id;
-        this.message = message;
-
-    }
-
     public String getId() {
         return id;
     }

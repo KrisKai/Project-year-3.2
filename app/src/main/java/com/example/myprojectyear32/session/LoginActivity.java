@@ -4,9 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -31,7 +29,6 @@ import java.util.Objects;
 public class LoginActivity extends AppCompatActivity {
 
     private TextInputLayout usernameET, passwordET;
-    private Button loginButton, signupButton;
     private boolean checkState = true;
     DatabaseReference reference;
 
@@ -44,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         usernameET = findViewById(R.id.userNameET);
         passwordET = findViewById(R.id.passWordET);
 
-        loginButton = findViewById(R.id.loginButton);
+        Button loginButton = findViewById(R.id.loginButton);
         loginButton.setOnClickListener(v -> {
             if(isConnected(LoginActivity.this)){
                 checkEmpty();
@@ -58,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
 
         });
 
-        signupButton = findViewById(R.id.signupButton);
+        Button signupButton = findViewById(R.id.signupButton);
         signupButton.setOnClickListener(v -> {
             Intent intent = new Intent(LoginActivity.this, SignupActivity.class);
             startActivity(intent);
@@ -70,9 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         wifiDialog.setMessage("Please connect the internet to login")
                 .setCancelable(false)
                 .setPositiveButton("Connect", (dialog, which) -> startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS)))
-                .setNegativeButton("Cancel", (dialog, which) -> {
-                    dialog.cancel();
-                })
+                .setNegativeButton("Cancel", (dialog, which) -> dialog.cancel())
                 .show();
     }
 

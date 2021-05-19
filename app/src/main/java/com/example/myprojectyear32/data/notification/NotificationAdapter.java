@@ -1,20 +1,15 @@
 package com.example.myprojectyear32.data.notification;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myprojectyear32.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class NotificationAdapter extends RecyclerView.Adapter {
     private ArrayList<Notification> mNotification;
@@ -53,14 +48,12 @@ public class NotificationAdapter extends RecyclerView.Adapter {
      * Lớp nắm giữ cấu trúc view
      */
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private View itemview;
         public TextView descriptionTV;
         public TextView dateTV;
         public ImageView detail_type;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            itemview = itemView;
             descriptionTV = itemView.findViewById(R.id.notification_tv);
             dateTV = itemView.findViewById(R.id.time_tv);
             //Xử lý khi nút Chi tiết được bấm
