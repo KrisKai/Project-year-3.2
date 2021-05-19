@@ -10,7 +10,7 @@ public class User {
     private String phoneNumber;
     private String DoB;
     private String gender;
-    private String connect;
+    private String connectCode;
 
     public User(){}
 
@@ -79,10 +79,10 @@ public class User {
     }
 
     public String getConnect() {
-        return connect;
+        return connectCode;
     }
 
     public void setConnect(String Connect) {
-        this.connect = Connect;
+        this.connectCode = Connect;
     }
 }

@@ -49,12 +49,10 @@ public class HomeFragment extends Fragment {
 
         TextView nameTextView = view.findViewById(R.id.nameTV);
 
-
         SessionManager session = new SessionManager(getContext());
         HashMap<String,String> userDetails = session.getUserDetailFromSession();
-        String name = userDetails.get(SessionManager.KEY_LASTNAME);
+        String name = userDetails.get(SessionManager.KEY_CONNECTION);
         nameTextView.setText(name);
-
 
         livingroomCardView = (CardView) view.findViewById(R.id.livingroomCard);
         livingroomCardView.setOnClickListener(new View.OnClickListener() {
