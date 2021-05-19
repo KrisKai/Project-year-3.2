@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment {
 
         SessionManager session = new SessionManager(getContext());
         HashMap<String,String> userDetails = session.getUserDetailFromSession();
-        String name = userDetails.get(SessionManager.KEY_CONNECTION);
+        String name = userDetails.get(SessionManager.KEY_LASTNAME);
         nameTextView.setText(name);
 
         livingroomCardView = (CardView) view.findViewById(R.id.livingroomCard);
