@@ -224,6 +224,20 @@ public class ChatbotFragment extends Fragment {
                 storedStr = "";
                 storedStatus = false;
             }
+            if(message.contains("bật")&&message.contains("quạt")&&!message.contains("phòng")){
+                storedStr = message;
+                storedStatus = true;
+            }else{
+                storedStr = "";
+                storedStatus = false;
+            }
+            if(message.contains("mở")&&message.contains("cửa")&&!message.contains("phòng")){
+                storedStr = message;
+                storedStatus = true;
+            }else{
+                storedStr = "";
+                storedStatus = false;
+            }
         }else {
             storedStr = storedStr + " " + message;
             storedStatus = false;

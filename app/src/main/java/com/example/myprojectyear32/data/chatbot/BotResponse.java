@@ -74,6 +74,35 @@ public class BotResponse {
                 //Do sth
             }
         }
+        // Turn on the fan
+        if (message.contains("bật")&&message.contains("quạt")) {
+
+            if(message.contains("phòng")){
+                outmessage = "Đang bật quạt..";
+
+
+                MQTTPublisher.Publisher("testpub");
+
+            }
+            else {
+                outmessage = "Bạn muốn bật quạt phòng nào ?";
+                //Do sth
+            }
+        }
+        // Open the door
+        if (message.contains("mở")&&message.contains("cửa")) {
+                    if(message.contains("phòng")){
+                        outmessage = "Đang mở cửa..";
+
+
+                        MQTTPublisher.Publisher("testpub");
+
+                    }
+                    else {
+                        outmessage = "Bạn muốn mở cửa phòng nào ?";
+                        //Do sth
+                    }
+                }
 
         if (message.contains("flip") && message.contains("coin")) {
             result = random == 0 ? "heads" : "tails";
