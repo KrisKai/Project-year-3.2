@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.example.myprojectyear32.session.LoginActivity;
 
 public class SplashActivity extends AppCompatActivity {
-    private static final int SPLASH_SCREEN = 2000;
+    private static final int SPLASH_SCREEN = 1500;
     Animation topAni;
     TextView splashTV;
     ImageView splashIV;

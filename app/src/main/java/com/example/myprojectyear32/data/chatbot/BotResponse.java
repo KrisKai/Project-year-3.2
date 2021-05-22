@@ -64,7 +64,7 @@ public class BotResponse {
 
 
 //                MQTTPublisher.Connect(context, "192.168.1.200:1883");
-                MQTTPublisher.Publisher("testpub");
+//                MQTTPublisher.Publisher("testpub");
 //                MQTTPublisher.MessageOutput();
 //                MQTTPublisher.Subcriber("android_receiver");
 
@@ -81,7 +81,7 @@ public class BotResponse {
                 outmessage = "Đang bật quạt..";
 
 
-                MQTTPublisher.Publisher("testpub");
+//                MQTTPublisher.Publisher("testpub");
 
             }
             else {
@@ -95,7 +95,7 @@ public class BotResponse {
                         outmessage = "Đang mở cửa..";
 
 
-                        MQTTPublisher.Publisher("testpub");
+//                        MQTTPublisher.Publisher("testpub");
 
                     }
                     else {

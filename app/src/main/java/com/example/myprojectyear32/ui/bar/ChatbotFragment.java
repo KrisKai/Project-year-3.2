@@ -39,8 +39,10 @@ public class ChatbotFragment extends Fragment {
     private boolean initialRequest;
     private TextToSpeech textToSpeech;
     private TextView textView1, textView2, textView3;
-    private String storedStr;
-    private boolean storedStatus = false;
+    private String storedStrForLed = "message for led",storedStrForFan = "message for fan",storedStrForDoor = "message for door";
+    private boolean storedStatusForLed = false;
+    private boolean storedStatusForFan = false;
+    private boolean storedStatusForDoor = false;
 
     public ChatbotFragment() {
         // Required empty public constructor
@@ -90,11 +92,13 @@ public class ChatbotFragment extends Fragment {
             inputMessage.setId("1");
             messageArrayList.add(inputMessage);
             recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
-            storeChat(textView1.getText().toString(),storedStatus);
-            BotResponse botResponse = new BotResponse(storedStr);
+            storedChatForLed(textView1.getText().toString(),storedStatusForLed);
+            BotResponse botResponse = new BotResponse(storedStrForLed);
             String response = botResponse.basicResponses(getContext());
             botResponse(response);
             speak(response);
+
+
         });
 
         cardView2.setOnClickListener(v -> {
@@ -115,13 +119,14 @@ public class ChatbotFragment extends Fragment {
             inputMessage.setId("1");
             messageArrayList.add(inputMessage);
             recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
-            BotResponse botResponse = new BotResponse(textView3.getText().toString());
+            storedChatForFan(textView1.getText().toString(),storedStatusForFan);
+            BotResponse botResponse = new BotResponse(storedStrForFan);
             String response = botResponse.basicResponses(getContext());
             botResponse(response);
             speak(response);
         });
 
-        ImageButton btnRecord = (ImageButton) view.findViewById(R.id.btn_record);
+        ImageButton btnRecord = view.findViewById(R.id.btn_record);
         btnRecord.setOnClickListener(v -> {
             Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
@@ -165,12 +170,29 @@ public class ChatbotFragment extends Fragment {
             inputMessage.setMessage(inputmessage);
             inputMessage.setId("1");
             messageArrayList.add(inputMessage);
-            storeChat(inputmessage,storedStatus);
+            if(inputmessage.contains("đèn")||(inputmessage.contains("phòng")&&storedStrForLed.contains("đèn"))){
+                storedChatForLed(inputmessage,storedStatusForLed);
+                BotResponse botResponse = new BotResponse(storedStrForLed);
+                String response = botResponse.basicResponses(getContext());
+                botResponse(response);
+                speak(response);
+                Toast.makeText(getContext(),storedStrForLed,Toast.LENGTH_SHORT).show();
+            }
+            if(inputmessage.contains("quạt")||(inputmessage.contains("phòng")&&storedStrForFan.contains("quạt"))){
+                storedChatForFan(inputmessage,storedStatusForFan);
+                BotResponse botResponse = new BotResponse(storedStrForFan);
+                String response = botResponse.basicResponses(getContext());
+                botResponse(response);
+                speak(response);
+            }
+            if(inputmessage.contains("cửa")||(inputmessage.contains("phòng")&&storedStrForDoor.contains("cửa"))){
+                storedChatForDoor(inputmessage,storedStatusForDoor);
+                BotResponse botResponse = new BotResponse(storedStrForDoor);
+                String response = botResponse.basicResponses(getContext());
+                botResponse(response);
+                speak(response);
+            }
             recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
-            BotResponse botResponse = new BotResponse(storedStr);
-            String response = botResponse.basicResponses(getContext());
-            botResponse(response);
-            speak(response);
         } else {
             Message inputMessage = new Message();
             inputMessage.setMessage(inputmessage);
@@ -203,44 +225,75 @@ public class ChatbotFragment extends Fragment {
                     inputMessage.setId("1");
                     messageArrayList.add(inputMessage);
                     recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
-                    storeChat(result.get(0),storedStatus);
-                    BotResponse botResponse = new BotResponse(storedStr);
-                    String response = botResponse.basicResponses(getContext());
-                    botResponse(response);
-                    speak(response);
-
+                    if(result.get(0).contains("đèn")||(result.get(0).contains("phòng")&&storedStrForLed.contains("đèn"))){
+                        storedChatForLed(result.get(0),storedStatusForLed);
+                        BotResponse botResponse = new BotResponse(storedStrForLed);
+                        String response = botResponse.basicResponses(getContext());
+                        botResponse(response);
+                        speak(response);
+                    }
+                    if(result.get(0).contains("quạt")||(result.get(0).contains("phòng")&&storedStrForFan.contains("quạt"))){
+                        storedChatForFan(result.get(0),storedStatusForFan);
+                        BotResponse botResponse = new BotResponse(storedStrForFan);
+                        String response = botResponse.basicResponses(getContext());
+                        botResponse(response);
+                        speak(response);
+                    }
+                    if(result.get(0).contains("cửa")||(result.get(0).contains("phòng")&&storedStrForDoor.contains("cửa"))){
+                        storedChatForDoor(result.get(0),storedStatusForDoor);
+                        BotResponse botResponse = new BotResponse(storedStrForDoor);
+                        String response = botResponse.basicResponses(getContext());
+                        botResponse(response);
+                        speak(response);
+                    }
                 }
                 break;
         }
 
     }
 
-    private void storeChat(String message, boolean status){
+    private void storedChatForLed(String message, boolean status){
         if(!status){
             if(message.contains("bật")&&message.contains("đèn")&&!message.contains("phòng")){
-                storedStr = message;
-                storedStatus = true;
+                storedStrForLed = message;
+                storedStatusForLed = true;
             }else{
-                storedStr = "";
-                storedStatus = false;
-            }
-            if(message.contains("bật")&&message.contains("quạt")&&!message.contains("phòng")){
-                storedStr = message;
-                storedStatus = true;
-            }else{
-                storedStr = "";
-                storedStatus = false;
-            }
-            if(message.contains("mở")&&message.contains("cửa")&&!message.contains("phòng")){
-                storedStr = message;
-                storedStatus = true;
-            }else{
-                storedStr = "";
-                storedStatus = false;
+                storedStrForLed = "";
+                storedStatusForLed = false;
             }
         }else {
-            storedStr = storedStr + " " + message;
-            storedStatus = false;
+            storedStrForLed = storedStrForLed + " " + message;
+            storedStatusForLed = false;
+        }
+
+    }
+    private void storedChatForFan(String message, boolean status){
+        if(!status){
+            if(message.contains("bật")&&message.contains("quạt")&&!message.contains("phòng")){
+                storedStrForFan = message;
+                storedStatusForFan = true;
+            }else{
+                storedStrForFan = "";
+                storedStatusForFan = false;
+            }
+        }else {
+            storedStrForFan = storedStrForFan + " " + message;
+            storedStatusForFan = false;
+        }
+
+    }
+    private void storedChatForDoor(String message, boolean status){
+        if(!status){
+            if(message.contains("mở")&&message.contains("cửa")&&!message.contains("phòng")){
+                storedStrForDoor = message;
+                storedStatusForDoor = true;
+            }else{
+                storedStrForDoor = "";
+                storedStatusForDoor = false;
+            }
+        }else {
+            storedStrForDoor = storedStrForDoor + " " + message;
+            storedStatusForDoor = false;
         }
 
     }
