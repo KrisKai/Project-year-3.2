@@ -78,7 +78,7 @@ public class NotificationFragment extends Fragment {
     }
 
     public void addNotification() {
-        reference = FirebaseDatabase.getInstance().getReference().child("User").child(userName).child("Notification");
+        reference = FirebaseDatabase.getInstance().getReference().child("Notification");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
