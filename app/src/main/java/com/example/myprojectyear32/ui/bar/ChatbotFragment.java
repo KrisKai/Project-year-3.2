@@ -258,7 +258,7 @@ public class ChatbotFragment extends Fragment {
                 storedStrForLed = message;
                 storedStatusForLed = true;
             }else{
-                storedStrForLed = "";
+                storedStrForLed = message;
                 storedStatusForLed = false;
             }
         }else {
@@ -273,7 +273,7 @@ public class ChatbotFragment extends Fragment {
                 storedStrForFan = message;
                 storedStatusForFan = true;
             }else{
-                storedStrForFan = "";
+                storedStrForFan = message;
                 storedStatusForFan = false;
             }
         }else {
@@ -288,7 +288,7 @@ public class ChatbotFragment extends Fragment {
                 storedStrForDoor = message;
                 storedStatusForDoor = true;
             }else{
-                storedStrForDoor = "";
+                storedStrForDoor = message;
                 storedStatusForDoor = false;
             }
         }else {
