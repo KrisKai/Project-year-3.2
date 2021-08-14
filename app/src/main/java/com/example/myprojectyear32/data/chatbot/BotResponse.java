@@ -28,6 +28,7 @@ public class BotResponse {
     public static String basicResponses(Context context) {
         SessionManager session = new SessionManager(context);
         HashMap<String,String> userDetails = session.getUserDetailFromSession();
+        String doorStatus = userDetails.get(SessionManager.KEY_DOORLR);
         String lightStatus = userDetails.get(SessionManager.KEY_LIGHTINGLR);
         Notification notification;
         DatabaseReference notiReference = null, statusReference = null;
@@ -72,18 +73,25 @@ public class BotResponse {
 
         if (message.contains("bật")&&message.contains("đèn")) {
 //
-            if(message.contains("phòng")){
-                outmessage = "Đang bật đèn..";
+            if(message.contains("phòng")&&message.contains("khách")){
+                if(doorStatus.equals("True")){
+                    outmessage = "Đang bật đèn..";
+
+                    notification = new Notification();
+                    notification.setDescription("Bật đèn phòng khách.");
+                    notification.setImage(R.mipmap.lighting);
+                    notification.setTime(date);
 
 
-                MQTTPublisher.Connect(context, "192.168.1.200:1883");
-                new Handler().postDelayed(() -> {
-                    //do sth
-                    MQTTPublisher.Publisher("led1");
-                },1000);
-//                MQTTPublisher.MessageOutput();
-//                MQTTPublisher.Subcriber("android_receiver");
+                    notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
+                    statusReference.child("lighting").setValue("True");
 
+                    MQTTPublisher.Connect(context, "192.168.1.200:1883");
+                    new Handler().postDelayed(() -> {
+                        //do sth
+                        MQTTPublisher.Publisher("led1");
+                    },1000);
+                }
             }
             else {
                 outmessage = "Bạn muốn bật đèn phòng nào ?";
@@ -96,9 +104,6 @@ public class BotResponse {
             if(message.contains("phòng")){
                 outmessage = "Đang bật quạt..";
 
-
-//                MQTTPublisher.Publisher("testpub");
-
             }
             else {
                 outmessage = "Bạn muốn bật quạt phòng nào ?";
@@ -108,18 +113,17 @@ public class BotResponse {
         // Open the door
         if (message.contains("mở")&&message.contains("cửa")) {
                     if(message.contains("phòng")&&message.contains("khách")){
-                        if(lightStatus.equals("True")){
+                        if(doorStatus.equals("True")){
                             outmessage = "Đang mở cửa..";
 
                             notification = new Notification();
-                            notification.setDescription("Bật đèn phòng khách.");
-                            notification.setImage(R.mipmap.lighting);
+                            notification.setDescription("Mở cửa phòng khách.");
+                            notification.setImage(R.mipmap.security);
 
                             notification.setTime(date);
 
-
                             notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
-                            statusReference.child("lighting").setValue("True");
+                            statusReference.child("door").setValue("True");
                             MQTTPublisher.Connect(context, "192.168.1.200:1883");
                             new Handler().postDelayed(() -> {
                                 //do sth
