@@ -176,7 +176,6 @@ public class ChatbotFragment extends Fragment {
                 String response = botResponse.basicResponses(getContext());
                 botResponse(response);
                 speak(response);
-                Toast.makeText(getContext(),storedStrForLed,Toast.LENGTH_SHORT).show();
             }
             if(inputmessage.contains("quạt")||(inputmessage.contains("phòng")&&storedStrForFan.contains("quạt"))){
                 storedChatForFan(inputmessage,storedStatusForFan);
@@ -191,7 +190,6 @@ public class ChatbotFragment extends Fragment {
                 String response = botResponse.basicResponses(getContext());
                 botResponse(response);
                 speak(response);
-                Toast.makeText(getContext(),storedStrForDoor,Toast.LENGTH_SHORT).show();
             }
             recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
         } else {
