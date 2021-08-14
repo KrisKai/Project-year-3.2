@@ -191,6 +191,7 @@ public class ChatbotFragment extends Fragment {
                 String response = botResponse.basicResponses(getContext());
                 botResponse(response);
                 speak(response);
+                Toast.makeText(getContext(),storedStrForDoor,Toast.LENGTH_SHORT).show();
             }
             recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
         } else {
