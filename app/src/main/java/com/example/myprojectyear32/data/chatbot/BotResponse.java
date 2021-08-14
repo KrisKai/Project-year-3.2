@@ -68,17 +68,12 @@ public class BotResponse {
         if (message.contains("bật")&&message.contains("đèn")) {
 //
             if(message.contains("phòng")){
-//                if(doorStatus.equals("True")){
                     outmessage = "Đang bật đèn..";
                     MQTTPublisher.Connect(context, "192.168.1.200:1883");
                     new Handler().postDelayed(() -> {
                         //do sth
                         MQTTPublisher.Publisher("led1");
                     },1000);
-//                }
-//                else{
-//                    outmessage = "Đèn đã được mở";
-//                }
             }
             else {
                 outmessage = "Bạn muốn bật đèn phòng nào ?";
@@ -100,17 +95,13 @@ public class BotResponse {
         // Open the door
         if (message.contains("mở")&&message.contains("cửa")) {
                     if(message.contains("phòng")){
-                        if(doorStatus.equals("True")){
                             outmessage = "Đang mở cửa..";
                             MQTTPublisher.Connect(context, "192.168.1.200:1883");
                             new Handler().postDelayed(() -> {
                                 //do sth
                                 MQTTPublisher.Publisher("door");
                             },1000);
-                        }
-                        else{
-                            outmessage = "Cửa đã được mở";
-                        }
+                        
 
                     }
                     else {
