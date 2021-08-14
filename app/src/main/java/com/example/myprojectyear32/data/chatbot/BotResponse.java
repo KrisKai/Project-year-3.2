@@ -84,7 +84,7 @@ public class BotResponse {
 
 
                     notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
-                    statusReference.child("lighting").setValue("True");
+//                    statusReference.child("lighting").setValue("True");
 
                     MQTTPublisher.Connect(context, "192.168.1.200:1883");
                     new Handler().postDelayed(() -> {
