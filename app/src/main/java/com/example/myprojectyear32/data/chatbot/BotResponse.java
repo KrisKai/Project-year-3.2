@@ -1,6 +1,7 @@
 package com.example.myprojectyear32.data.chatbot;
 
 import android.content.Context;
+import android.os.Handler;
 
 import com.example.myprojectyear32.MainActivity;
 import com.example.myprojectyear32.data.mqtt.MQTTPublisher;
@@ -63,8 +64,11 @@ public class BotResponse {
                 outmessage = "Đang bật đèn..";
 
 
-//                MQTTPublisher.Connect(context, "192.168.1.200:1883");
-//                MQTTPublisher.Publisher("testpub");
+                MQTTPublisher.Connect(context, "192.168.1.200:1883");
+                new Handler().postDelayed(() -> {
+                    //do sth
+                    MQTTPublisher.Publisher("led1");
+                },1000);
 //                MQTTPublisher.MessageOutput();
 //                MQTTPublisher.Subcriber("android_receiver");
 
@@ -95,7 +99,11 @@ public class BotResponse {
                         outmessage = "Đang mở cửa..";
 
 
-//                        MQTTPublisher.Publisher("testpub");
+                        MQTTPublisher.Connect(context, "192.168.1.200:1883");
+                        new Handler().postDelayed(() -> {
+                            //do sth
+                            MQTTPublisher.Publisher("door");
+                        },1000);
 
                     }
                     else {
