@@ -2,18 +2,24 @@ package com.example.myprojectyear32.data.chatbot;
 
 import android.content.Context;
 import android.os.Handler;
+import android.widget.Toast;
 
 import com.example.myprojectyear32.MainActivity;
+import com.example.myprojectyear32.R;
 import com.example.myprojectyear32.data.mqtt.MQTTPublisher;
+import com.example.myprojectyear32.data.notification.Notification;
 import com.example.myprojectyear32.session.SessionManager;
+import com.google.firebase.database.DatabaseReference;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Random;
 
 public class BotResponse {
 
     private static String message;
-    private Boolean state;
+
 
     public BotResponse(String _message){
         message = _message.toLowerCase();
@@ -23,6 +29,12 @@ public class BotResponse {
         SessionManager session = new SessionManager(context);
         HashMap<String,String> userDetails = session.getUserDetailFromSession();
         String connect = userDetails.get(SessionManager.KEY_LASTNAME);
+        Notification notification;
+        DatabaseReference notiReference = null, statusReference = null;
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        String date = dateFormat.format(calendar.getTime());
+        int maxID = 0;
         final int min = 0;
         final int max = 2;
         final int random = new Random().nextInt((max - min) + 1) + min;
@@ -95,10 +107,18 @@ public class BotResponse {
         }
         // Open the door
         if (message.contains("mở")&&message.contains("cửa")) {
-                    if(message.contains("phòng")){
+                    if(message.contains("phòng")&&message.contains("khách")){
                         outmessage = "Đang mở cửa..";
 
+                        notification = new Notification();
+                        notification.setDescription("Bật đèn phòng khách.");
+                        notification.setImage(R.mipmap.lighting);
 
+                        notification.setTime(date);
+
+
+                        notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
+                        statusReference.child("lighting").setValue("True");
                         MQTTPublisher.Connect(context, "192.168.1.200:1883");
                         new Handler().postDelayed(() -> {
                             //do sth
