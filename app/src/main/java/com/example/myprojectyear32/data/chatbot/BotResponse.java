@@ -101,8 +101,6 @@ public class BotResponse {
                                 //do sth
                                 MQTTPublisher.Publisher("door");
                             },1000);
-                        
-
                     }
                     else {
                         outmessage = "Bạn muốn mở cửa phòng nào ?";
