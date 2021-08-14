@@ -28,7 +28,7 @@ public class BotResponse {
     public static String basicResponses(Context context) {
         SessionManager session = new SessionManager(context);
         HashMap<String,String> userDetails = session.getUserDetailFromSession();
-        String connect = userDetails.get(SessionManager.KEY_LASTNAME);
+        String lightStatus = userDetails.get(SessionManager.KEY_LIGHTINGLR);
         Notification notification;
         DatabaseReference notiReference = null, statusReference = null;
         Calendar calendar = Calendar.getInstance();
@@ -108,22 +108,24 @@ public class BotResponse {
         // Open the door
         if (message.contains("mở")&&message.contains("cửa")) {
                     if(message.contains("phòng")&&message.contains("khách")){
-                        outmessage = "Đang mở cửa..";
+                        if(lightStatus.equals("True")){
+                            outmessage = "Đang mở cửa..";
 
-                        notification = new Notification();
-                        notification.setDescription("Bật đèn phòng khách.");
-                        notification.setImage(R.mipmap.lighting);
+                            notification = new Notification();
+                            notification.setDescription("Bật đèn phòng khách.");
+                            notification.setImage(R.mipmap.lighting);
 
-                        notification.setTime(date);
+                            notification.setTime(date);
 
 
-                        notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
-                        statusReference.child("lighting").setValue("True");
-                        MQTTPublisher.Connect(context, "192.168.1.200:1883");
-                        new Handler().postDelayed(() -> {
-                            //do sth
-                            MQTTPublisher.Publisher("door");
-                        },1000);
+                            notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
+                            statusReference.child("lighting").setValue("True");
+                            MQTTPublisher.Connect(context, "192.168.1.200:1883");
+                            new Handler().postDelayed(() -> {
+                                //do sth
+                                MQTTPublisher.Publisher("door");
+                            },1000);
+                        }
 
                     }
                     else {
