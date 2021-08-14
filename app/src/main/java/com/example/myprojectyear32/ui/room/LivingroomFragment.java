@@ -7,12 +7,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.myprojectyear32.R;
+import com.example.myprojectyear32.data.mqtt.MQTTPublisher;
 import com.example.myprojectyear32.data.notification.Notification;
 import com.example.myprojectyear32.session.SessionManager;
 import com.example.myprojectyear32.ui.bar.HomeFragment;
@@ -107,6 +109,11 @@ public class LivingroomFragment extends Fragment {
                     notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
                     Toast.makeText(getActivity(), notification.getDescription(), Toast.LENGTH_SHORT).show();
                     statusReference.child("lighting").setValue("True");
+                    MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
+                    new Handler().postDelayed(() -> {
+                        //do sth
+                        MQTTPublisher.Publisher("led1");
+                    },1000);
                 } else {
                     statusReference.child("lighting").setValue("False");
                     Toast.makeText(getActivity(), "Tắt đèn phòng khách", Toast.LENGTH_SHORT).show();
@@ -148,6 +155,11 @@ public class LivingroomFragment extends Fragment {
                     notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
                     Toast.makeText(getActivity(), notification.getDescription(), Toast.LENGTH_SHORT).show();
                     statusReference.child("door").setValue("True");
+                    MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
+                    new Handler().postDelayed(() -> {
+                        //do sth
+                        MQTTPublisher.Publisher("door");
+                    },1000);
                 } else {
                     Toast.makeText(getActivity(), "Đóng cửa phòng khách", Toast.LENGTH_SHORT).show();
                     statusReference.child("door").setValue("False");
