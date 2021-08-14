@@ -74,7 +74,7 @@ public class BotResponse {
         if (message.contains("bật")&&message.contains("đèn")) {
 //
             if(message.contains("phòng")){
-                if(doorStatus.equals("True")){
+//                if(doorStatus.equals("True")){
                     outmessage = "Đang bật đèn..";
 
                     notification = new Notification();
@@ -91,10 +91,10 @@ public class BotResponse {
                         //do sth
                         MQTTPublisher.Publisher("led1");
                     },1000);
-                }
-                else{
-                    outmessage = "Đèn đã được mở";
-                }
+//                }
+//                else{
+//                    outmessage = "Đèn đã được mở";
+//                }
             }
             else {
                 outmessage = "Bạn muốn bật đèn phòng nào ?";
