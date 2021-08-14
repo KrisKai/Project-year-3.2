@@ -1,7 +1,9 @@
 package com.example.myprojectyear32.data.mqtt;
 
 import android.content.Context;
+import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,41 +24,47 @@ public class MQTTPublisher extends AppCompatActivity {
 
 
     public static void Connect(Context context, String serverIP) {
-        if (client == null) {
-            MqttConnectOptions options = new MqttConnectOptions();
-            options.setUserName("Henefisa103");
-            options.setPassword("henefisa103".toCharArray());
-            String clientId = MqttClient.generateClientId();
+//        new Handler().postDelayed(() -> {
 
-//        192.168.1.200:1883
+        String clientId = "android_test";
+        if (client == null) {
             client =
                     new MqttAndroidClient(context, "tcp://" + serverIP,
                             clientId);
-
-            if (!client.isConnected()) {
-                try {
-                    IMqttToken token = client.connect(options);
-                    token.setActionCallback(new IMqttActionListener() {
-                        @Override
-                        public void onSuccess(IMqttToken asyncActionToken) {
-                            // We are connected
-                            Log.d("mqtt", "onSuccess Con");
-                        }
-
-                        @Override
-                        public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                            // Something went wrong e.gw    . connection timeout or firewall problems
-                            Log.d("mqtt", "onFailure Con");
-
-                        }
-                    });
-                } catch (MqttException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                Log.d("mqtt", "Connected");
-            }
         }
+
+        MqttConnectOptions options = new MqttConnectOptions();
+        options.setUserName("Henefisa103");
+        options.setPassword("henefisa103".toCharArray());
+        //            String clientId = MqttClient.generateClientId();
+
+        //        192.168.1.200:1883
+
+        if (!client.isConnected()) {
+            try {
+                IMqttToken token = client.connect(options);
+                token.setActionCallback(new IMqttActionListener() {
+                    @Override
+                    public void onSuccess(IMqttToken asyncActionToken) {
+                        // We are connected
+                        Log.d("mqtt", "onSuccess Con");
+                    }
+
+                    @Override
+                    public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                        // Something went wrong e.gw    . connection timeout or firewall problems
+                        Log.d("mqtt", "onFailure Con");
+
+                    }
+                });
+            } catch (MqttException e) {
+                e.printStackTrace();
+            }
+        } else {
+            Log.d("mqtt", "Connected");
+        }
+        //do sth
+//        },1000);
     }
 
     public static void Publisher(String msg){
