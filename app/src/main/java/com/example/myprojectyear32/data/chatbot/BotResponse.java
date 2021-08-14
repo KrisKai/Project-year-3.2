@@ -77,13 +77,13 @@ public class BotResponse {
 //                if(doorStatus.equals("True")){
                     outmessage = "Đang bật đèn..";
 
-                    notification = new Notification();
-                    notification.setDescription("Bật đèn phòng khách.");
-                    notification.setImage(R.mipmap.lighting);
-                    notification.setTime(date);
-
-
-                    notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
+//                    notification = new Notification();
+//                    notification.setDescription("Bật đèn phòng khách.");
+//                    notification.setImage(R.mipmap.lighting);
+//                    notification.setTime(date);
+//
+//
+//                    notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
 //                    statusReference.child("lighting").setValue("True");
 
                     MQTTPublisher.Connect(context, "192.168.1.200:1883");
@@ -120,7 +120,7 @@ public class BotResponse {
                             outmessage = "Đang mở cửa..";
 
                             notification = new Notification();
-                            notification.setDescription("Mở cửa phòng khách.");
+                            notification.setDescription("Mở cửa phòng.");
                             notification.setImage(R.mipmap.security);
 
                             notification.setTime(date);
