@@ -73,7 +73,7 @@ public class BotResponse {
 
         if (message.contains("bật")&&message.contains("đèn")) {
 //
-            if(message.contains("phòng")&&message.contains("khách")){
+            if(message.contains("phòng")){
                 if(doorStatus.equals("True")){
                     outmessage = "Đang bật đèn..";
 
@@ -91,6 +91,9 @@ public class BotResponse {
                         //do sth
                         MQTTPublisher.Publisher("led1");
                     },1000);
+                }
+                else{
+                    outmessage = "Đèn đã được mở";
                 }
             }
             else {
@@ -112,7 +115,7 @@ public class BotResponse {
         }
         // Open the door
         if (message.contains("mở")&&message.contains("cửa")) {
-                    if(message.contains("phòng")&&message.contains("khách")){
+                    if(message.contains("phòng")){
                         if(doorStatus.equals("True")){
                             outmessage = "Đang mở cửa..";
 
@@ -129,6 +132,9 @@ public class BotResponse {
                                 //do sth
                                 MQTTPublisher.Publisher("door");
                             },1000);
+                        }
+                        else{
+                            outmessage = "Cửa đã được mở";
                         }
 
                     }
