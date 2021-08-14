@@ -29,12 +29,6 @@ public class BotResponse {
         SessionManager session = new SessionManager(context);
         HashMap<String,String> userDetails = session.getUserDetailFromSession();
         String doorStatus = userDetails.get(SessionManager.KEY_DOORLR);
-        String lightStatus = userDetails.get(SessionManager.KEY_LIGHTINGLR);
-        Notification notification;
-        DatabaseReference notiReference = null, statusReference = null;
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        String date = dateFormat.format(calendar.getTime());
         int maxID = 0;
         final int min = 0;
         final int max = 2;
@@ -76,16 +70,6 @@ public class BotResponse {
             if(message.contains("phòng")){
 //                if(doorStatus.equals("True")){
                     outmessage = "Đang bật đèn..";
-
-                    notification = new Notification();
-                    notification.setDescription("Bật đèn phòng khách.");
-                    notification.setImage(R.mipmap.lighting);
-                    notification.setTime(date);
-
-
-                    notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
-//                    statusReference.child("lighting").setValue("True");
-
                     MQTTPublisher.Connect(context, "192.168.1.200:1883");
                     new Handler().postDelayed(() -> {
                         //do sth
@@ -118,15 +102,6 @@ public class BotResponse {
                     if(message.contains("phòng")){
                         if(doorStatus.equals("True")){
                             outmessage = "Đang mở cửa..";
-
-                            notification = new Notification();
-                            notification.setDescription("Mở cửa phòng khách.");
-                            notification.setImage(R.mipmap.security);
-
-                            notification.setTime(date);
-
-                            notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
-                            statusReference.child("door").setValue("True");
                             MQTTPublisher.Connect(context, "192.168.1.200:1883");
                             new Handler().postDelayed(() -> {
                                 //do sth
