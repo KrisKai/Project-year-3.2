@@ -80,15 +80,18 @@ public class BotResponse {
                 //Do sth
             }
         }
-        // Turn on the fan
-        if (message.contains("bật")&&message.contains("quạt")) {
+        if (message.contains("nhiệt")&&message.contains("độ")) {
 
             if(message.contains("phòng")){
-                outmessage = "Đang bật quạt..";
 
+                MQTTPublisher.Connect(context, "192.168.1.200:1883");
+                MQTTPublisher.Subcriber("living");
+                MQTTPublisher.MessageOutput();
+                MQTTPublisher.Publisher("sensor");
+                outmessage = "Đang lấy dữ liệu..";
             }
             else {
-                outmessage = "Bạn muốn bật quạt phòng nào ?";
+                outmessage = "Bạn muốn biết nhiệt độ phòng nào ?";
                 //Do sth
             }
         }
