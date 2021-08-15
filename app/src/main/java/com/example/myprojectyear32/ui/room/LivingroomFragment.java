@@ -192,8 +192,9 @@ public class LivingroomFragment extends Fragment {
                 //do sth
                 MQTTPublisher.Subcriber("living");
                 new Handler().postDelayed(() -> {
-                    MQTTPublisher.MessageOutput();
                     MQTTPublisher.Publisher("sensor");
+                    MQTTPublisher.MessageOutput();
+                    MQTTPublisher.MessageOutput();
                     String message = MQTTPublisher.msg;
                     if(message.contains("Temp")){
                         sensorTV.setText(message);
