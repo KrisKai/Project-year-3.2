@@ -189,7 +189,7 @@ public class LivingroomFragment extends Fragment {
             MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
             MQTTPublisher.Subcriber("living");
             String message = MQTTPublisher.msg;
-            while(message.contains("Temp")){
+            while(!message.contains("Temp")){
                 MQTTPublisher.MessageOutput();
                 MQTTPublisher.Publisher("sensor");
                 message = MQTTPublisher.msg;
