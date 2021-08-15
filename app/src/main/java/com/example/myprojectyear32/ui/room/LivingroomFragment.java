@@ -199,7 +199,7 @@ public class LivingroomFragment extends Fragment {
                         sensorTV.setText(message);
                     }
                     Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                },5000);
+                },6000);
             },1000);
 
 
