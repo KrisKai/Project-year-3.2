@@ -21,7 +21,7 @@ import java.io.UnsupportedEncodingException;
 
 public class MQTTPublisher extends AppCompatActivity {
     static MqttAndroidClient client;
-    public static String msg = "null";
+    public static String msg = "Loading";
 
     public static void Connect(Context context, String serverIP) {
 //        new Handler().postDelayed(() -> {
