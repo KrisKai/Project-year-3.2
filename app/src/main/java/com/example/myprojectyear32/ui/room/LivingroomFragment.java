@@ -182,7 +182,7 @@ public class LivingroomFragment extends Fragment {
 
         });
         mSensor.setOnClickListener(v -> {
-            int i = 0;
+
             notification = new Notification();
             notification.setDescription("Cập nhập nhiệt độ phòng.");
             notification.setImage(R.mipmap.sensor);
@@ -190,6 +190,7 @@ public class LivingroomFragment extends Fragment {
             MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
             new Handler().postDelayed(() -> {
                 //do sth
+                int i = 0;
                 while (i<10){
                     i++;
                     MQTTPublisher.Subcriber("living");
