@@ -68,6 +68,7 @@ public class LivingroomFragment extends Fragment {
                     .addToBackStack(null)
                     .commit();
         });
+        TextView sensorTV = view.findViewById(R.id.sensorTV);
 
         SessionManager session = new SessionManager(getContext());
         HashMap<String,String> userDetails = session.getUserDetailFromSession();
@@ -193,6 +194,7 @@ public class LivingroomFragment extends Fragment {
             MQTTPublisher.Subcriber("living");
             MQTTPublisher.MessageOutput();
             String[] message = MQTTPublisher.msg;
+            sensorTV.setText(message.toString());
             Toast.makeText(getActivity(), message.toString(), Toast.LENGTH_SHORT).show();
         });
 
