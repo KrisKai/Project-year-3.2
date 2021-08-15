@@ -33,7 +33,6 @@ public class BotResponse {
         final int min = 0;
         final int max = 2;
         final int random = new Random().nextInt((max - min) + 1) + min;
-//        String message = _message.toLowerCase();
         String result;
         String outmessage;
         switch(random) {
@@ -84,10 +83,10 @@ public class BotResponse {
 
             if(message.contains("phòng")){
 
-                MQTTPublisher.Connect(context, "192.168.1.200:1883");
-                MQTTPublisher.Subcriber("living");
-                MQTTPublisher.MessageOutput();
-                MQTTPublisher.Publisher("sensor");
+//                MQTTPublisher.Connect(context, "192.168.1.200:1883");
+//                MQTTPublisher.Subcriber("living");
+//                MQTTPublisher.MessageOutput();
+//                MQTTPublisher.Publisher("sensor");
                 outmessage = "Đang lấy dữ liệu..";
             }
             else {
