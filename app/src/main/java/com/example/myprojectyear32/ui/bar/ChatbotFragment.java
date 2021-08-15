@@ -39,9 +39,9 @@ public class ChatbotFragment extends Fragment {
     private boolean initialRequest;
     private TextToSpeech textToSpeech;
     private TextView textView1, textView2, textView3;
-    private String storedStrForLed = "message for led",storedStrForFan = "message for fan",storedStrForDoor = "message for door";
+    private String storedStrForLed = "message for led",storedStrForSensor = "message for sensor",storedStrForDoor = "message for door";
     private boolean storedStatusForLed = false;
-    private boolean storedStatusForFan = false;
+    private boolean storedStatusForSensor = false;
     private boolean storedStatusForDoor = false;
 
     public ChatbotFragment() {
@@ -119,8 +119,8 @@ public class ChatbotFragment extends Fragment {
             inputMessage.setId("1");
             messageArrayList.add(inputMessage);
             recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
-            storedChatForFan(textView1.getText().toString(),storedStatusForFan);
-            BotResponse botResponse = new BotResponse(storedStrForFan);
+            storedChatForSensor(textView1.getText().toString(),storedStatusForSensor);
+            BotResponse botResponse = new BotResponse(storedStrForSensor);
             String response = botResponse.basicResponses(getContext());
             botResponse(response);
             speak(response);
@@ -177,9 +177,9 @@ public class ChatbotFragment extends Fragment {
                 botResponse(response);
                 speak(response);
             }
-            if(inputmessage.contains("quạt")||(inputmessage.contains("phòng")&&storedStrForFan.contains("quạt"))){
-                storedChatForFan(inputmessage,storedStatusForFan);
-                BotResponse botResponse = new BotResponse(storedStrForFan);
+            if(inputmessage.contains("nhiệt")||(inputmessage.contains("phòng")&&storedStrForSensor.contains("nhiệt"))){
+                storedChatForSensor(inputmessage,storedStatusForSensor);
+                BotResponse botResponse = new BotResponse(storedStrForSensor);
                 String response = botResponse.basicResponses(getContext());
                 botResponse(response);
                 speak(response);
@@ -231,9 +231,9 @@ public class ChatbotFragment extends Fragment {
                         botResponse(response);
                         speak(response);
                     }
-                    if(result.get(0).contains("quạt")||(result.get(0).contains("phòng")&&storedStrForFan.contains("quạt"))){
-                        storedChatForFan(result.get(0),storedStatusForFan);
-                        BotResponse botResponse = new BotResponse(storedStrForFan);
+                    if(result.get(0).contains("nhiệt")||(result.get(0).contains("phòng")&&storedStrForSensor.contains("quạt"))){
+                        storedChatForSensor(result.get(0),storedStatusForSensor);
+                        BotResponse botResponse = new BotResponse(storedStrForSensor);
                         String response = botResponse.basicResponses(getContext());
                         botResponse(response);
                         speak(response);
@@ -266,18 +266,18 @@ public class ChatbotFragment extends Fragment {
         }
 
     }
-    private void storedChatForFan(String message, boolean status){
+    private void storedChatForSensor(String message, boolean status){
         if(!status){
-            if(message.contains("bật")&&message.contains("quạt")&&!message.contains("phòng")){
-                storedStrForFan = message;
-                storedStatusForFan = true;
+            if(message.contains("nhiệt")&&message.contains("độ")&&!message.contains("phòng")){
+                storedStrForSensor = message;
+                storedStatusForSensor = true;
             }else{
-                storedStrForFan = message;
-                storedStatusForFan = false;
+                storedStrForSensor = message;
+                storedStatusForSensor = false;
             }
         }else {
-            storedStrForFan = storedStrForFan + " " + message;
-            storedStatusForFan = false;
+            storedStrForSensor = storedStrForSensor + " " + message;
+            storedStatusForSensor = false;
         }
 
     }
