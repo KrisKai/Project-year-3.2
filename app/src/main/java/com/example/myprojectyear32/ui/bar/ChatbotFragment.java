@@ -206,7 +206,7 @@ public class ChatbotFragment extends Fragment {
                             speak(response);
                         }
                         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                    },6000);
+                    },10000);
                 },1000);
             }
             if(inputmessage.contains("cửa")||(inputmessage.contains("phòng")&&storedStrForDoor.contains("cửa"))){
