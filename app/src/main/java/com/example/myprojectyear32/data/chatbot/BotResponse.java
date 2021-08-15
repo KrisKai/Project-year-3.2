@@ -2,13 +2,19 @@ package com.example.myprojectyear32.data.chatbot;
 
 import android.content.Context;
 import android.os.Handler;
+import android.widget.Toast;
 
+import com.example.myprojectyear32.MainActivity;
+import com.example.myprojectyear32.R;
 import com.example.myprojectyear32.data.mqtt.MQTTPublisher;
+import com.example.myprojectyear32.data.notification.Notification;
 import com.example.myprojectyear32.session.SessionManager;
+import com.google.firebase.database.DatabaseReference;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Random;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class BotResponse {
 
@@ -28,40 +34,41 @@ public class BotResponse {
         final int max = 2;
         final int random = new Random().nextInt((max - min) + 1) + min;
         String result;
-        AtomicReference<String> outmessage = null;
+        String outmessage;
+        final String[] tmp = new String[1];
         switch(random) {
             case 0:
-                outmessage.set("Tôi không hiểu...");
+                outmessage = "Tôi không hiểu...";
                 break;
             case 1:
-                outmessage.set("Thử nói cái gì khác");
+                outmessage = "Thử nói cái gì khác";
                 break;
             case 2:
-                outmessage.set("Hmmmm! Bạn có thể hỏi lại được không?");
+                outmessage = "Hmmmm! Bạn có thể hỏi lại được không?";
                 break;
             default:
-                outmessage.set("error");
+                outmessage = "error";
         }
         if (message.contains("hello")) {
             switch (random) {
                 case 0:
-                    outmessage.set("Hello there!");
+                    outmessage = "Hello there!";
                     break;
                 case 1:
-                    outmessage.set("Sup");
+                    outmessage = "Sup";
                     break;
                 case 2:
-                    outmessage.set("Ey yo!");
+                    outmessage = "Ey yo!";
                     break;
                 default:
-                    outmessage.set("error");
+                    outmessage = "error";
             }
         }
 
         if (message.contains("bật")&&message.contains("đèn")) {
 //
             if(message.contains("phòng")){
-                    outmessage.set("Đang bật đèn..");
+                    outmessage = "Đang bật đèn..";
                     MQTTPublisher.Connect(context, "192.168.1.200:1883");
                     new Handler().postDelayed(() -> {
                         //do sth
@@ -69,7 +76,7 @@ public class BotResponse {
                     },1000);
             }
             else {
-                outmessage.set("Bạn muốn bật đèn phòng nào ?");
+                outmessage = "Bạn muốn bật đèn phòng nào ?";
                 //Do sth
             }
         }
@@ -78,32 +85,34 @@ public class BotResponse {
             if(message.contains("phòng")){
 
                 MQTTPublisher.Connect(context, "192.168.1.200:1883");
-//                MQTTPublisher.Subcriber("living");
-//                MQTTPublisher.MessageOutput();
-//                MQTTPublisher.Publisher("sensor");
-                outmessage.set("Đang lấy dữ liệu..");
-                new Handler().postDelayed(() -> {
-                    //do sth
-                    MQTTPublisher.Subcriber("living");
-                    MQTTPublisher.Publisher("sensor");
-                    MQTTPublisher.MessageOutput();
-                    new Handler().postDelayed(() -> {
-                        String message = MQTTPublisher.msg;
-                        if(message.contains("Temp")){
-                            outmessage.set(message);
-                        }
-                    },6000);
-                },1000);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        MQTTPublisher.Subcriber("living");
+                        MQTTPublisher.Publisher("sensor");
+                        MQTTPublisher.MessageOutput();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                String message = MQTTPublisher.msg;
+                                if(message.contains("Temp")){
+                                    tmp[0] = message.toString();
+                                }
+                            }
+                        }, 6000);
+                    }
+                }, 1000);
+                outmessage = tmp[0];
             }
             else {
-                outmessage.set("Bạn muốn biết nhiệt độ phòng nào ?");
+                outmessage = "Bạn muốn biết nhiệt độ phòng nào ?";
                 //Do sth
             }
         }
         // Open the door
         if (message.contains("mở")&&message.contains("cửa")) {
                     if(message.contains("phòng")){
-                            outmessage.set("Đang mở cửa..");
+                            outmessage = "Đang mở cửa..";
                             MQTTPublisher.Connect(context, "192.168.1.200:1883");
                             new Handler().postDelayed(() -> {
                                 //do sth
@@ -111,54 +120,54 @@ public class BotResponse {
                             },1000);
                     }
                     else {
-                        outmessage.set("Bạn muốn mở cửa phòng nào ?");
+                        outmessage = "Bạn muốn mở cửa phòng nào ?";
                         //Do sth
                     }
                 }
 
         if (message.contains("flip") && message.contains("coin")) {
             result = random == 0 ? "heads" : "tails";
-            outmessage.set("I flipped a coin and it landed on " + result);
+            outmessage = "I flipped a coin and it landed on " + result;
         }
         if (message.contains("hello")) {
             switch (random) {
                 case 0:
-                    outmessage.set("Hello there!");
+                    outmessage = "Hello there!";
                     break;
                 case 1:
-                    outmessage.set("Sup");
+                    outmessage = "Sup";
                     break;
                 case 2:
-                    outmessage.set("Buongiorno!");
+                    outmessage = "Buongiorno!";
                     break;
                 default:
-                    outmessage.set("error");
+                    outmessage = "error";
             }
 
 
 //            } else {
 
 //            }
-            return outmessage.get();
+            return outmessage;
         }
         if(message.contains("how are you")) {
             switch (random) {
                 case 0:
-                    outmessage.set("I'm doing fine, thanks!");
+                    outmessage = "I'm doing fine, thanks!";
                     break;
                 case 1:
-                    outmessage.set("I'm hungry...");
+                    outmessage = "I'm hungry...";
                     break;
                 case 2:
-                    outmessage.set("Pretty good! How about you?");
+                    outmessage = "Pretty good! How about you?";
                     break;
                 default:
-                    outmessage.set("error");
+                    outmessage = "error";
             }
         }
         if (message.contains("open") && message.contains("google")) {
-            outmessage.set("Opening Google...");
+            outmessage = "Opening Google...";
         }
-        return outmessage.get();
+        return outmessage;
     }
 }
