@@ -186,9 +186,10 @@ public class LivingroomFragment extends Fragment {
             notification.setImage(R.mipmap.sensor);
             notification.setTime(date);
             MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
-//                MQTTPublisher.Subcriber("living");
-//                MQTTPublisher.MessageOutput();
-//                MQTTPublisher.Publisher("sensor");
+            new Handler().postDelayed(() -> {
+                //do sth
+                MQTTPublisher.Publisher("sensor");
+            },1000);
             Toast.makeText(getActivity(), notification.getDescription(), Toast.LENGTH_SHORT).show();
         });
 
