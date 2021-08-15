@@ -103,13 +103,14 @@ public class LoginActivity extends AppCompatActivity {
                     String lightingLR = snapshot.child(username).child("Status").child("LivingRoom").child("lighting").getValue(String.class);
                     String fanLR = snapshot.child(username).child("Status").child("LivingRoom").child("fan").getValue(String.class);
                     String doorLR = snapshot.child(username).child("Status").child("LivingRoom").child("door").getValue(String.class);
+                    String sensorLR = snapshot.child(username).child("Status").child("LivingRoom").child("sensor").getValue(String.class);
 
 
                     assert systemPassword != null;
                     if(systemPassword.equals(password)){
                         SessionManager session = new SessionManager(LoginActivity.this);
                         session.createLoginSession(username, password,firstname, lastname, phonenumber, email, dob, gender, connectCode);
-                        session.createStatus(doorLR, fanLR, lightingLR);
+                        session.createStatus(doorLR, fanLR, lightingLR, sensorLR);
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                     } else {
