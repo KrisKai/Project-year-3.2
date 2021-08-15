@@ -187,9 +187,10 @@ public class LivingroomFragment extends Fragment {
             notification.setImage(R.mipmap.sensor);
             notification.setTime(date);
             MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
-            MQTTPublisher.Subcriber("living");
+
             String message = MQTTPublisher.msg;
             while(!message.contains("Temp")){
+                MQTTPublisher.Subcriber("living");
                 MQTTPublisher.MessageOutput();
                 MQTTPublisher.Publisher("sensor");
                 message = MQTTPublisher.msg;
