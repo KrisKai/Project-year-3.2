@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.speech.RecognizerIntent;
 import android.speech.tts.TextToSpeech;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ import com.example.myprojectyear32.R;
 import com.example.myprojectyear32.data.chatbot.BotResponse;
 import com.example.myprojectyear32.data.chatbot.ChatAdapter;
 import com.example.myprojectyear32.data.chatbot.Message;
+import com.example.myprojectyear32.data.mqtt.MQTTPublisher;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -177,12 +179,39 @@ public class ChatbotFragment extends Fragment {
                 botResponse(response);
                 speak(response);
             }
-            if(inputmessage.contains("nhiệt")||(inputmessage.contains("phòng")&&storedStrForSensor.contains("nhiệt"))){
+            if(inputmessage.contains("nhiệt")&&!storedStrForSensor.contains("phòng")){
                 storedChatForSensor(inputmessage,storedStatusForSensor);
                 BotResponse botResponse = new BotResponse(storedStrForSensor);
                 String response = botResponse.basicResponses(getContext());
                 botResponse(response);
                 speak(response);
+            }
+            if(inputmessage.contains("phòng")&&storedStrForSensor.contains("nhiệt")){
+                storedChatForSensor(inputmessage,storedStatusForSensor);
+                MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        MQTTPublisher.Subcriber("living");
+                        MQTTPublisher.Publisher("sensor");
+                        MQTTPublisher.MessageOutput();
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                String message = MQTTPublisher.msg;
+                                String response = "Tôi không hiểu..";
+                                if(message.contains("Temp")){
+                                    response = message;
+                                    botResponse(response);
+                                    speak(response);
+                                }else{
+                                    botResponse(response);
+                                    speak(response);
+                                }
+                            }
+                        }, 6000);
+                    }
+                }, 1000);
             }
             if(inputmessage.contains("cửa")||(inputmessage.contains("phòng")&&storedStrForDoor.contains("cửa"))){
                 storedChatForDoor(inputmessage,storedStatusForDoor);
@@ -231,7 +260,7 @@ public class ChatbotFragment extends Fragment {
                         botResponse(response);
                         speak(response);
                     }
-                    if(result.get(0).contains("nhiệt")||(result.get(0).contains("phòng")&&storedStrForSensor.contains("quạt"))){
+                    if(result.get(0).contains("nhiệt")||(result.get(0).contains("phòng")&&storedStrForSensor.contains("nhiệt"))){
                         storedChatForSensor(result.get(0),storedStatusForSensor);
                         BotResponse botResponse = new BotResponse(storedStrForSensor);
                         String response = botResponse.basicResponses(getContext());
