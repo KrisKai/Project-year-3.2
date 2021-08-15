@@ -188,17 +188,21 @@ public class LivingroomFragment extends Fragment {
             notification.setImage(R.mipmap.sensor);
             notification.setTime(date);
             MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
-            while (i<10){
-                i++;
-                MQTTPublisher.Subcriber("living");
-                MQTTPublisher.MessageOutput();
-                MQTTPublisher.Publisher("sensor");
-                String message = MQTTPublisher.msg;
-                if(message.contains("Temp")){
-                    sensorTV.setText(message);
+            new Handler().postDelayed(() -> {
+                //do sth
+                while (i<10){
+                    i++;
+                    MQTTPublisher.Subcriber("living");
+                    MQTTPublisher.MessageOutput();
+                    MQTTPublisher.Publisher("sensor");
+                    String message = MQTTPublisher.msg;
+                    if(message.contains("Temp")){
+                        sensorTV.setText(message);
+                    }
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                 }
-                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-            }
+            },1000);
+
 
 
         });
