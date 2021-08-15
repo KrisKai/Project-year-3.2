@@ -5,12 +5,14 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SwitchCompat;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.myprojectyear32.R;
@@ -35,12 +37,14 @@ public class LivingroomFragment extends Fragment {
     FloatingActionButton floatingActionButton;
     Notification notification;
     DatabaseReference notiReference, statusReference;
-    SwitchCompat mLightBulb, mFan, mSensor, mDoor;
+    SwitchCompat mLightBulb, mFan, mDoor;
+    CardView  mSensor;
     private String date;
     private long maxID=0;
     private boolean doorState = false;
     private boolean fanState = false;
     private boolean lightBulbState = false;
+    private boolean sensorState = false;
 
     public LivingroomFragment() {
         // Required empty public constructor
@@ -71,6 +75,14 @@ public class LivingroomFragment extends Fragment {
         String mLightBulbStatus = userDetails.get(SessionManager.KEY_LIGHTINGLR);
         String mDoorStatus = userDetails.get(SessionManager.KEY_DOORLR);
         String mFanStatus = userDetails.get(SessionManager.KEY_FANLR);
+        String mSensorStatus = userDetails.get(SessionManager.KEY_SENSORLR);
+
+        mSensor = view.findViewById(R.id.sensorLRCard);
+
+        TextView mSensorTV = view.findViewById(R.id.sensorTV);
+        mSensorTV.setText(mSensorStatus);
+
+
 
         mLightBulb = view.findViewById(R.id.lightLRswitch);
         if(mLightBulbStatus.equals("True")){
@@ -143,7 +155,6 @@ public class LivingroomFragment extends Fragment {
             }
 
         });
-
         mDoor.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if(!doorState){
                 if(isChecked){
@@ -168,6 +179,13 @@ public class LivingroomFragment extends Fragment {
                 doorState = false;
             }
 
+        });
+        mSensor.setOnClickListener(v -> {
+            notification = new Notification();
+            notification.setDescription("Cập nhập nhiệt độ phòng.");
+            notification.setImage(R.mipmap.sensor);
+            notification.setTime(date);
+            Toast.makeText(getActivity(), notification.getDescription(), Toast.LENGTH_SHORT).show();
         });
 
         notiReference = FirebaseDatabase.getInstance().getReference().child("User").child(userName).child("Notification");
