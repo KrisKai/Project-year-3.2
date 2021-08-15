@@ -190,18 +190,14 @@ public class LivingroomFragment extends Fragment {
             MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
             new Handler().postDelayed(() -> {
                 //do sth
-                int i = 0;
-                while (i<10){
-                    i++;
-                    MQTTPublisher.Subcriber("living");
-                    MQTTPublisher.MessageOutput();
-                    MQTTPublisher.Publisher("sensor");
-                    String message = MQTTPublisher.msg;
-                    if(message.contains("Temp")){
-                        sensorTV.setText(message);
-                    }
-                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                MQTTPublisher.Subcriber("living");
+                MQTTPublisher.MessageOutput();
+                MQTTPublisher.Publisher("sensor");
+                String message = MQTTPublisher.msg;
+                if(message.contains("Temp")){
+                    sensorTV.setText(message);
                 }
+                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
             },1000);
 
 
