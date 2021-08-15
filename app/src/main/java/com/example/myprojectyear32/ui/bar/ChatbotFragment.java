@@ -199,12 +199,13 @@ public class ChatbotFragment extends Fragment {
                             @Override
                             public void run() {
                                 String message = MQTTPublisher.msg;
-                                String response = "Tôi không hiểu..";
+                                String response = message;
                                 if(message.contains("Temp")){
-                                    response = message;
+                                    
                                     botResponse(response);
                                     speak(response);
                                 }else{
+                                    response = "Tôi không hiểu.."
                                     botResponse(response);
                                     speak(response);
                                 }
