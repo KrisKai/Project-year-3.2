@@ -182,24 +182,25 @@ public class LivingroomFragment extends Fragment {
 
         });
         mSensor.setOnClickListener(v -> {
+            int i = 0;
             notification = new Notification();
             notification.setDescription("Cập nhập nhiệt độ phòng.");
             notification.setImage(R.mipmap.sensor);
             notification.setTime(date);
-
-
-            String message = MQTTPublisher.msg;
-            while(!message.contains("Temp")){
+            while (i<10){
+                i++;
                 MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
                 MQTTPublisher.Subcriber("living");
                 MQTTPublisher.MessageOutput();
                 MQTTPublisher.Publisher("sensor");
-                message = MQTTPublisher.msg;
+                String message = MQTTPublisher.msg;
+                if(message.contains("Temp")){
+                    sensorTV.setText(message);
+                }
+                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
             }
-            if(message.contains("Temp")){
-                sensorTV.setText(message);
-            }
-            Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+
+
         });
 
         notiReference = FirebaseDatabase.getInstance().getReference().child("User").child(userName).child("Notification");
