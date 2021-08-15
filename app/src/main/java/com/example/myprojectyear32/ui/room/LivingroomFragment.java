@@ -192,10 +192,7 @@ public class LivingroomFragment extends Fragment {
             },1000);
             MQTTPublisher.Subcriber("living");
             MQTTPublisher.MessageOutput();
-            new Handler().postDelayed(() -> {
-                //do sth
-                MQTTPublisher.Publisher("sensor");
-            },1000);
+            String[] message = MQTTPublisher.msg;
             Toast.makeText(getActivity(), notification.getDescription(), Toast.LENGTH_SHORT).show();
         });
 
