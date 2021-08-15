@@ -194,7 +194,9 @@ public class LivingroomFragment extends Fragment {
             MQTTPublisher.Subcriber("living");
             MQTTPublisher.MessageOutput();
             String message = MQTTPublisher.msg;
-            sensorTV.setText(message.toString());
+            if(message.contains("Temp")){
+                sensorTV.setText(message);
+            }
             Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
         });
 
