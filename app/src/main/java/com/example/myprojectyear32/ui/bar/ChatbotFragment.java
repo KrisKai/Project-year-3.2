@@ -188,31 +188,28 @@ public class ChatbotFragment extends Fragment {
             }
             if(inputmessage.contains("phòng")&&storedStrForSensor.contains("nhiệt")){
                 storedChatForSensor(inputmessage,storedStatusForSensor);
-                MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        MQTTPublisher.Subcriber("living");
-                        MQTTPublisher.Publisher("sensor");
-                        MQTTPublisher.MessageOutput();
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                String message = MQTTPublisher.msg;
-                                String response = message;
-                                if(message.contains("Temp")){
 
-                                    botResponse(response);
-                                    speak(response);
-                                }else{
-                                    response = "Tôi không hiểu..";
-                                    botResponse(response);
-                                    speak(response);
-                                }
-                            }
-                        }, 6000);
-                    }
-                }, 1000);
+                MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
+                new Handler().postDelayed(() -> {
+                    //do sth
+                    MQTTPublisher.Subcriber("living");
+                    MQTTPublisher.Publisher("sensor");
+                    MQTTPublisher.MessageOutput();
+                    new Handler().postDelayed(() -> {
+                        String message = MQTTPublisher.msg;
+                        String response = message;
+                        if(message.contains("Temp")){
+
+                            botResponse(response);
+                            speak(response);
+                        }else{
+                            response = "Tôi không hiểu..";
+                            botResponse(response);
+                            speak(response);
+                        }
+                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                    },6000);
+                },1000);
             }
             if(inputmessage.contains("cửa")||(inputmessage.contains("phòng")&&storedStrForDoor.contains("cửa"))){
                 storedChatForDoor(inputmessage,storedStatusForDoor);
