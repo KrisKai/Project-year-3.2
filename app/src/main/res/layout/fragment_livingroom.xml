@@ -158,6 +158,7 @@
                 app:cardCornerRadius="12dp"
                 android:layout_margin="12dp">
 
+
                 <LinearLayout
                     android:orientation="vertical"
                     android:padding="16dp"
@@ -177,14 +178,14 @@
                         android:padding="5dp"
                         android:text="Sensor"/>
 
-                    <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/sensorLRswitch"
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:thumb="@drawable/custom_thumb"
-                        android:padding="5dp"
-                        app:track="@drawable/custom_track"
-                        tools:ignore="UseSwitchCompatOrMaterialXml" />
+                        android:textSize="20sp"
+                        android:textColor="#77B2D9"
+                        android:padding="15dp"
+                        android:text="Sensor"
+                        android:id="@+id/sensorTV"/>
 
                 </LinearLayout>
 
