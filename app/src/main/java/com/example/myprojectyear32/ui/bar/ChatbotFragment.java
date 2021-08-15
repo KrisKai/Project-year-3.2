@@ -99,8 +99,6 @@ public class ChatbotFragment extends Fragment {
             String response = botResponse.basicResponses(getContext());
             botResponse(response);
             speak(response);
-
-
         });
 
         cardView2.setOnClickListener(v -> {
@@ -188,7 +186,7 @@ public class ChatbotFragment extends Fragment {
             }
             if(inputmessage.contains("phòng")&&storedStrForSensor.contains("nhiệt")){
                 storedChatForSensor(inputmessage,storedStatusForSensor);
-
+                Toast.makeText(getActivity(), storedStrForDoor, Toast.LENGTH_SHORT).show();
                 MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
                 new Handler().postDelayed(() -> {
                     //do sth
@@ -258,12 +256,37 @@ public class ChatbotFragment extends Fragment {
                         botResponse(response);
                         speak(response);
                     }
-                    if(result.get(0).contains("nhiệt")||(result.get(0).contains("phòng")&&storedStrForSensor.contains("nhiệt"))){
+                    if(result.get(0).contains("nhiệt")&&!storedStrForSensor.contains("phòng")){
                         storedChatForSensor(result.get(0),storedStatusForSensor);
                         BotResponse botResponse = new BotResponse(storedStrForSensor);
                         String response = botResponse.basicResponses(getContext());
                         botResponse(response);
                         speak(response);
+                    }
+                    if(result.get(0).contains("phòng")&&storedStrForSensor.contains("nhiệt")){
+                        storedChatForSensor(result.get(0),storedStatusForSensor);
+
+                        MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
+                        new Handler().postDelayed(() -> {
+                            //do sth
+                            MQTTPublisher.Subcriber("living");
+                            MQTTPublisher.Publisher("sensor");
+                            MQTTPublisher.MessageOutput();
+                            new Handler().postDelayed(() -> {
+                                String message = MQTTPublisher.msg;
+                                String response = message;
+                                if(message.contains("Temp")){
+
+                                    botResponse(response);
+                                    speak(response);
+                                }else{
+                                    response = "Tôi không hiểu..";
+                                    botResponse(response);
+                                    speak(response);
+                                }
+                                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                            },6000);
+                        },1000);
                     }
                     if(result.get(0).contains("cửa")||(result.get(0).contains("phòng")&&storedStrForDoor.contains("cửa"))){
                         storedChatForDoor(result.get(0),storedStatusForDoor);
