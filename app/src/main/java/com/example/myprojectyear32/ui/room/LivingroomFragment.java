@@ -193,7 +193,7 @@ public class LivingroomFragment extends Fragment {
             MQTTPublisher.Subcriber("living");
             MQTTPublisher.MessageOutput();
             String[] message = MQTTPublisher.msg;
-            Toast.makeText(getActivity(), notification.getDescription(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), message.toString(), Toast.LENGTH_SHORT).show();
         });
 
         notiReference = FirebaseDatabase.getInstance().getReference().child("User").child(userName).child("Notification");
