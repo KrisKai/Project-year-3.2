@@ -84,25 +84,7 @@ public class BotResponse {
 
             if(message.contains("phòng")){
 
-                MQTTPublisher.Connect(context, "192.168.1.200:1883");
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        MQTTPublisher.Subcriber("living");
-                        MQTTPublisher.Publisher("sensor");
-                        MQTTPublisher.MessageOutput();
-                        new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                String message = MQTTPublisher.msg;
-                                if(message.contains("Temp")){
-                                    tmp[0] = message.toString();
-                                }
-                            }
-                        }, 6000);
-                    }
-                }, 1000);
-                outmessage = tmp[0];
+
             }
             else {
                 outmessage = "Bạn muốn biết nhiệt độ phòng nào ?";
