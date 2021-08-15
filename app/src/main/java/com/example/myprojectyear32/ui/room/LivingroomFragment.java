@@ -193,9 +193,9 @@ public class LivingroomFragment extends Fragment {
             },1000);
             MQTTPublisher.Subcriber("living");
             MQTTPublisher.MessageOutput();
-//            String[] message = MQTTPublisher.msg;
+            String message = MQTTPublisher.msg;
             sensorTV.setText("message.toString()");
-            Toast.makeText(getActivity(), "message.toString()", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
         });
 
         notiReference = FirebaseDatabase.getInstance().getReference().child("User").child(userName).child("Notification");
