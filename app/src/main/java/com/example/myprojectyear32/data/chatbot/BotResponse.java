@@ -84,7 +84,7 @@ public class BotResponse {
             if(message.contains("phòng")){
 
                 MQTTPublisher.Connect(context, "192.168.1.200:1883");
-                MQTTPublisher.Subcriber("living");
+//                MQTTPublisher.Subcriber("living");
 //                MQTTPublisher.MessageOutput();
 //                MQTTPublisher.Publisher("sensor");
                 outmessage = "Đang lấy dữ liệu..";

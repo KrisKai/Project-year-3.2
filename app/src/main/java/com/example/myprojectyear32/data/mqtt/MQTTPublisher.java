@@ -87,30 +87,36 @@ public class MQTTPublisher extends AppCompatActivity {
     }
 
     public static void Subcriber(String topic){
-        int qos = 1;
-        try {
-            IMqttToken subToken = client.subscribe(topic, qos);
-            subToken.setActionCallback(new IMqttActionListener() {
-                @Override
-                public void onSuccess(IMqttToken asyncActionToken) {
-                    // The message was published
-                    Log.d("mqtt", "onSuccess Sub");
-                }
+        if (client.isConnected()) {
+            int qos = 1;
+            try {
+                IMqttToken subToken = client.subscribe(topic, qos);
+                subToken.setActionCallback(new IMqttActionListener() {
+                    @Override
+                    public void onSuccess(IMqttToken asyncActionToken) {
+                        // The message was published
+                        Log.d("mqtt", "onSuccess Sub");
+                    }
 
-                @Override
-                public void onFailure(IMqttToken asyncActionToken,
-                                      Throwable exception) {
-                    // The subscription could not be performed, maybe the user was not
-                    // authorized to subscribe on the specified topic e.g. using wildcards
-                    Log.d("mqtt", "onFailure Sub");
-                }
-            });
-        } catch (MqttException e) {
-            e.printStackTrace();
+                    @Override
+                    public void onFailure(IMqttToken asyncActionToken,
+                                          Throwable exception) {
+                        // The subscription could not be performed, maybe the user was not
+                        // authorized to subscribe on the specified topic e.g. using wildcards
+                        Log.d("mqtt", "onFailure Sub");
+                    }
+                });
+            } catch (MqttException e) {
+                e.printStackTrace();
+            }
+        }
+        else {
+            Log.d("mqtt", "onFailure Sub Con");
         }
     }
 
     public static void MessageOutput(){
+        final String[] msg = {""};
         client.setCallback(new MqttCallback() {
             @Override
             public void connectionLost(Throwable cause) {
@@ -120,6 +126,7 @@ public class MQTTPublisher extends AppCompatActivity {
             @Override
             public void messageArrived(String topic, MqttMessage message) throws Exception {
                 Log.d("mqtt", message.toString());
+                msg[0] = message.toString();
             }
 
             @Override
