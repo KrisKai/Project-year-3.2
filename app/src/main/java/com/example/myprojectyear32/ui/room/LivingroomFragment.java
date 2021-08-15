@@ -193,10 +193,8 @@ public class LivingroomFragment extends Fragment {
             },1000);
             MQTTPublisher.Subcriber("living");
             MQTTPublisher.MessageOutput();
-            String message = "null";
-            if(!MQTTPublisher.msg.isEmpty()){
-                message = MQTTPublisher.msg;
-            }
+            String message = MQTTPublisher.msg;
+
             if(message.contains("Temp")){
                 sensorTV.setText(message);
             }
