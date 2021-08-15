@@ -172,6 +172,7 @@ public class SignupActivity extends AppCompatActivity {
                     reference.child(username).child("Status").child("LivingRoom").child("lighting").setValue("False");
                     reference.child(username).child("Status").child("LivingRoom").child("fan").setValue("False");
                     reference.child(username).child("Status").child("LivingRoom").child("door").setValue("False");
+                    reference.child(username).child("Status").child("LivingRoom").child("sensor").setValue("null");
                     Intent intent = new Intent(SignupActivity.this,LoginActivity.class);
                     startActivity(intent);
                 }
