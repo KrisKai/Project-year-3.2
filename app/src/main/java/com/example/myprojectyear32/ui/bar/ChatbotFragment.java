@@ -254,7 +254,7 @@ public class ChatbotFragment extends Fragment {
                         botResponse(response);
                         speak(response);
                     }
-                    if(result.get(0).contains("nhiệt")&&!storedStrForSensor.contains("phòng")){
+                    if(result.get(0).contains("nhiệt")&&!result.get(0).contains("phòng")){
                         storedChatForSensor(result.get(0),storedStatusForSensor);
                         BotResponse botResponse = new BotResponse(storedStrForSensor);
                         String response = botResponse.basicResponses(getContext());
