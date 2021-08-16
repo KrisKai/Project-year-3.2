@@ -99,7 +99,7 @@ public class LivingroomFragment extends Fragment {
 
         String[] tempF = cutTextMsg[0].split("=");
         String[] humidityF = cutTextMsg[0].split("=");
-        tempTV.setText(tempF[0]);
+        tempTV.setText(tempF[1]);
         humidTV.setText(humidityF[1]);
 
         mLightBulb.setOnCheckedChangeListener((buttonView, isChecked) -> {
