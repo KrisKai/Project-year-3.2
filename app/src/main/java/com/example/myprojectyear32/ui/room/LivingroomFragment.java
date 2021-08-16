@@ -118,7 +118,7 @@ public class LivingroomFragment extends Fragment {
                     MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
                     new Handler().postDelayed(() -> {
                         //do sth
-                        MQTTPublisher.Publisher("led1");
+                        MQTTPublisher.Publisher("led_on");
                     },1000);
                 } else {
                     statusReference.child("lighting").setValue("False");

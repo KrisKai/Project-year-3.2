@@ -72,7 +72,7 @@ public class BotResponse {
                     MQTTPublisher.Connect(context, "192.168.1.200:1883");
                     new Handler().postDelayed(() -> {
                         //do sth
-                        MQTTPublisher.Publisher("led1");
+                        MQTTPublisher.Publisher("led_on");
                     },1000);
             }
             else {
@@ -98,7 +98,7 @@ public class BotResponse {
                             MQTTPublisher.Connect(context, "192.168.1.200:1883");
                             new Handler().postDelayed(() -> {
                                 //do sth
-                                MQTTPublisher.Publisher("door");
+                                MQTTPublisher.Publisher("door_open");
                             },1000);
                     }
                     else {
