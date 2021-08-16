@@ -50,9 +50,9 @@
             app:layout_constraintVertical_bias="0.206" />
 
         <GridLayout
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="130dp"
             android:columnCount="2"
-            android:rowCount="2"
+            android:rowCount="1"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:alignmentMode="alignMargins"
@@ -172,8 +172,9 @@
                 <ImageView
                     android:layout_marginTop="10dp"
                     android:src="@mipmap/sensor"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"/>
+                    android:layout_marginStart="10dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
