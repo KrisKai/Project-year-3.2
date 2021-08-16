@@ -35,7 +35,6 @@ public class BotResponse {
         final int random = new Random().nextInt((max - min) + 1) + min;
         String result;
         String outmessage;
-        final String[] tmp = new String[1];
         switch(random) {
             case 0:
                 outmessage = "Tôi không hiểu";
