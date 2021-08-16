@@ -171,7 +171,7 @@ public class LivingroomFragment extends Fragment {
                     if(message.contains("Temp")){
                         String[] cutText = message.split(" ");
                         tempTV.setText(cutText[0]);
-                        humidTV.setText(cutText[1]);
+                        humidTV.setText(cutText[3]);
                     }
                     Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                 },6000);
