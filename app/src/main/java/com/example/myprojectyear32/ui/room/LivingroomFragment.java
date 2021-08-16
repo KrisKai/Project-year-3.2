@@ -115,6 +115,11 @@ public class LivingroomFragment extends Fragment {
                         MQTTPublisher.Publisher("led_on");
                     },1000);
                 } else {
+                    notification = new Notification();
+                    notification.setDescription("Tắt đèn phòng khách.");
+                    notification.setImage(R.mipmap.lighting);
+                    notification.setTime(date);
+                    notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
                     MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
                     new Handler().postDelayed(() -> {
                         //do sth
@@ -134,7 +139,6 @@ public class LivingroomFragment extends Fragment {
                     notification.setDescription("Mở cửa phòng khách.");
                     notification.setImage(R.mipmap.security);
                     notification.setTime(date);
-
                     notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
                     statusReference.child("door").setValue("True");
                     MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
@@ -143,6 +147,11 @@ public class LivingroomFragment extends Fragment {
                         MQTTPublisher.Publisher("door_open");
                     },1000);
                 } else {
+                    notification = new Notification();
+                    notification.setDescription("Đóng cửa phòng khách.");
+                    notification.setImage(R.mipmap.sensor);
+                    notification.setTime(date);
+                    notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
                     MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
                     new Handler().postDelayed(() -> {
                         //do sth
@@ -174,6 +183,11 @@ public class LivingroomFragment extends Fragment {
                         tempTV.setText(cutText[0]);
                         humidTV.setText(cutText[1]);
                         statusReference.child("sensor").setValue(message);
+                        notification = new Notification();
+                        notification.setDescription(message);
+                        notification.setImage(R.mipmap.sensor);
+                        notification.setTime(date);
+                        notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
                     }
                 },6000);
             },1000);
