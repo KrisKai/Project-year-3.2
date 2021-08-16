@@ -16,7 +16,7 @@
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButtonBR"
+            android:id="@+id/floatingActionButtonBaR"
             android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
             android:layout_width="wrap_content"
@@ -62,7 +62,7 @@
 
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/lightingBRCard"
+                android:id="@+id/lightingBaRCard"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
@@ -92,7 +92,7 @@
                         android:text="Light bulb"/>
 
                     <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/lightBRswitch"
+                        android:id="@+id/lightBaRswitch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="5dp"
@@ -105,7 +105,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/securityBRCard"
+                android:id="@+id/securityBaRCard"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
@@ -136,7 +136,7 @@
                         android:text="Door"/>
 
                     <androidx.appcompat.widget.SwitchCompat
-                        android:id="@+id/doorBRswitch"
+                        android:id="@+id/doorBaRswitch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:thumb="@drawable/custom_thumb"
@@ -151,7 +151,7 @@
         </GridLayout>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/sensorBRCard"
+            android:id="@+id/sensorBaRCard"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
