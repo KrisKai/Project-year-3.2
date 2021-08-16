@@ -180,8 +180,10 @@ public class LivingroomFragment extends Fragment {
                     String message = MQTTPublisher.msg;
                     if(message.contains("Temp")){
                         String[] cutText = message.split("\\s+");
-                        tempTV.setText(cutText[0]);
-                        humidTV.setText(cutText[1]);
+                        String[] temp = cutText[0].split("=");
+                        String[] humidity = cutText[0].split("=");
+                        tempTV.setText(temp[1]);
+                        humidTV.setText(humidity[1]);
                         statusReference.child("sensor").setValue(message);
                         notification = new Notification();
                         notification.setDescription(message);
