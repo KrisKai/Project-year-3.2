@@ -228,7 +228,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:padding="10dp"
+                        android:padding="5dp"
                         android:text="Temperature"
                         android:textColor="#77B2D9"
                         android:textSize="16sp" />
@@ -237,7 +237,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:padding="10dp"
+                        android:padding="5dp"
                         android:text="Humidity"
                         android:textColor="#77B2D9"
                         android:textSize="16sp" />
@@ -251,9 +251,9 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textSize="20sp"
+                        android:textSize="25sp"
                         android:textColor="#77B2D9"
-                        android:padding="15dp"
+                        android:padding="10dp"
                         android:text="Temp"
                         android:layout_weight="1"
                         android:id="@+id/sensorTV"/>
@@ -263,9 +263,9 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
+                        android:textSize="25sp"
                         android:textColor="#77B2D9"
-                        android:padding="20dp"
+                        android:padding="10dp"
                         android:layout_weight="1"
                         android:text="Humid"
                         android:id="@+id/humidTV"/>
