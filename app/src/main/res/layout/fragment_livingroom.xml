@@ -249,7 +249,7 @@
                         android:textSize="20sp"
                         android:textColor="#77B2D9"
                         android:padding="15dp"
-                        android:text="Sensor"
+                        android:text="Temp"
                         android:id="@+id/sensorTV"/>
 
 
@@ -261,8 +261,8 @@
                         android:textColor="#77B2D9"
                         android:padding="15dp"
                         android:layout_marginStart="100dp"
-                        android:text="Sensor"
-                        android:id="@+id/humTV"/>
+                        android:text="Humid"
+                        android:id="@+id/humidTV"/>
                 </LinearLayout>
 
 
