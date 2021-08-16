@@ -173,7 +173,7 @@ public class LivingroomFragment extends Fragment {
                         String[] cutText = message.split("\\s+");
                         tempTV.setText(cutText[0]);
                         humidTV.setText(cutText[1]);
-                        statusReference.child("lighting").setValue(message);
+                        statusReference.child("sensor").setValue(message);
                     }
                 },6000);
             },1000);
