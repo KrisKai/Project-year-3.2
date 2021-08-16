@@ -186,7 +186,6 @@ public class ChatbotFragment extends Fragment {
             }
             if(inputmessage.contains("phòng")&&storedStrForSensor.contains("nhiệt")){
                 storedChatForSensor(inputmessage,storedStatusForSensor);
-                Toast.makeText(getActivity(), storedStrForDoor, Toast.LENGTH_SHORT).show();
                 MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
                 new Handler().postDelayed(() -> {
                     //do sth
