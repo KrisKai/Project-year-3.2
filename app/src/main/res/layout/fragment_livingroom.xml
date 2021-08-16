@@ -197,14 +197,15 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/sensorLRCard"
-            android:layout_width="350dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:layout_marginBottom="30dp"
             app:cardElevation="6dp"
             app:cardCornerRadius="12dp"
-            android:layout_marginStart="30dp">
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp">
 
 
             <LinearLayout
@@ -223,16 +224,18 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="68dp"
                         android:layout_height="wrap_content"
-                        android:textSize="16sp"
-                        android:textColor="#77B2D9"
+                        android:layout_weight="1"
                         android:padding="5dp"
-                        android:text="Temperature"/>
+                        android:text="Temperature"
+                        android:textColor="#77B2D9"
+                        android:textSize="16sp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="100dp"
+                        android:layout_weight="1"
                         android:padding="5dp"
                         android:text="Humidity"
                         android:textColor="#77B2D9"
@@ -246,10 +249,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:textColor="#77B2D9"
                         android:padding="15dp"
                         android:text="Temp"
+                        android:layout_weight="1"
                         android:id="@+id/sensorTV"/>
 
 
@@ -257,10 +261,10 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="20sp"
+                        android:textSize="15sp"
                         android:textColor="#77B2D9"
                         android:padding="15dp"
-                        android:layout_marginStart="100dp"
+                        android:layout_weight="1"
                         android:text="Humid"
                         android:id="@+id/humidTV"/>
                 </LinearLayout>
