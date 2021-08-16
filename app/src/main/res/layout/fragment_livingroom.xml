@@ -104,51 +104,6 @@
 
             </androidx.cardview.widget.CardView>
 
-<!--            <androidx.cardview.widget.CardView-->
-<!--                android:id="@+id/fanLRCard"-->
-<!--                android:layout_width="80dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_columnWeight="1"-->
-<!--                android:layout_rowWeight="1"-->
-<!--                app:cardElevation="6dp"-->
-<!--                android:layout_marginBottom="30dp"-->
-<!--                app:cardCornerRadius="12dp"-->
-<!--                android:layout_margin="12dp">-->
-
-<!--                <LinearLayout-->
-<!--                    android:orientation="vertical"-->
-<!--                    android:padding="16dp"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent">-->
-
-<!--                    <ImageView-->
-<!--                        android:layout_marginTop="10dp"-->
-<!--                        android:src="@mipmap/fan"-->
-<!--                        android:layout_width="40dp"-->
-<!--                        android:layout_height="40dp"/>-->
-<!--                    <TextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:textSize="16sp"-->
-<!--                        android:padding="5dp"-->
-<!--                        android:textColor="#77B2D9"-->
-<!--                        android:text="Fan"/>-->
-
-<!--                    <androidx.appcompat.widget.SwitchCompat-->
-<!--                        android:id="@+id/fanLRswitch"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:padding="5dp"-->
-<!--                        android:thumb="@drawable/custom_thumb"-->
-<!--                        app:track="@drawable/custom_track"-->
-<!--                        tools:ignore="UseSwitchCompatOrMaterialXml" />-->
-
-
-<!--                </LinearLayout>-->
-
-<!--            </androidx.cardview.widget.CardView>-->
-
-
             <androidx.cardview.widget.CardView
                 android:id="@+id/securityLRCard"
                 android:layout_width="80dp"
