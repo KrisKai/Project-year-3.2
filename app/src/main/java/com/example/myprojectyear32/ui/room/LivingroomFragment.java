@@ -68,6 +68,7 @@ public class LivingroomFragment extends Fragment {
         });
         TextView tempTV = view.findViewById(R.id.sensorTV);
         TextView humidTV = view.findViewById(R.id.humidTV);
+        mSensor = view.findViewById(R.id.sensorLRCard);
 
         SessionManager session = new SessionManager(getContext());
         HashMap<String,String> userDetails = session.getUserDetailFromSession();
