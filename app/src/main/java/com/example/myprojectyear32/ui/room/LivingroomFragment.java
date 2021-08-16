@@ -37,7 +37,7 @@ public class LivingroomFragment extends Fragment {
     FloatingActionButton floatingActionButton;
     Notification notification;
     DatabaseReference notiReference, statusReference;
-    SwitchCompat mLightBulb, mFan, mDoor;
+    SwitchCompat mLightBulb, mDoor;
     CardView  mSensor;
     private String date;
     private long maxID=0;
@@ -69,6 +69,7 @@ public class LivingroomFragment extends Fragment {
                     .commit();
         });
         TextView sensorTV = view.findViewById(R.id.sensorTV);
+        TextView sensorTV = view.findViewById(R.id.sensorTV);
 
         SessionManager session = new SessionManager(getContext());
         HashMap<String,String> userDetails = session.getUserDetailFromSession();
@@ -94,14 +95,6 @@ public class LivingroomFragment extends Fragment {
             lightBulbState = false;
         }
 
-        mFan = view.findViewById(R.id.fanLRswitch);
-        if(mFanStatus.equals("True")){
-            mFan.setChecked(true);
-            fanState = true;
-        }else {
-            mFan.setChecked(false);
-            fanState = false;
-        }
         mDoor = view.findViewById(R.id.doorLRswitch);
         if(mDoorStatus.equals("True")){
             mDoor.setChecked(true);
@@ -133,26 +126,6 @@ public class LivingroomFragment extends Fragment {
                 }
             }else {
                 lightBulbState = false;
-            }
-
-        });
-        mFan.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if(!fanState){
-                if(isChecked){
-                    notification = new Notification();
-                    notification.setDescription("Bật quạt phòng khách.");
-                    notification.setImage(R.mipmap.fan);
-                    notification.setTime(date);
-
-                    notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
-                    Toast.makeText(getActivity(), notification.getDescription(), Toast.LENGTH_SHORT).show();
-                    statusReference.child("fan").setValue("True");
-                } else {
-                    statusReference.child("fan").setValue("False");
-                    Toast.makeText(getActivity(), "Tắt quạt phòng khách", Toast.LENGTH_SHORT).show();
-                }
-            }else {
-                fanState = false;
             }
 
         });
@@ -196,6 +169,7 @@ public class LivingroomFragment extends Fragment {
                 new Handler().postDelayed(() -> {
                     String message = MQTTPublisher.msg;
                     if(message.contains("Temp")){
+                        String[] cutText = message.split(" ");
                         sensorTV.setText(message);
                     }
                     Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
