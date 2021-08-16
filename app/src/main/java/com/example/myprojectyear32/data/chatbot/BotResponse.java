@@ -126,7 +126,7 @@ public class BotResponse {
                 MQTTPublisher.Connect(context, "192.168.1.200:1883");
                 new Handler().postDelayed(() -> {
                     //do sth
-                    MQTTPublisher.Publisher("door_off");
+                    MQTTPublisher.Publisher("door_close");
                 },1000);
             }
             else {
