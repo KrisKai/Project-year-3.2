@@ -143,7 +143,7 @@ public class LivingroomFragment extends Fragment {
                     MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
                     new Handler().postDelayed(() -> {
                         //do sth
-                        MQTTPublisher.Publisher("door");
+                        MQTTPublisher.Publisher("door_open");
                     },1000);
                 } else {
                     Toast.makeText(getActivity(), "Đóng cửa phòng khách", Toast.LENGTH_SHORT).show();
