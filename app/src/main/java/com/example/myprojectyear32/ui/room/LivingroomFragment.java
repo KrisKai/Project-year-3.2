@@ -95,6 +95,10 @@ public class LivingroomFragment extends Fragment {
             doorState = false;
         }
 
+        String[] cutTextMsg = mSensorStatus.split("\\s+");
+        tempTV.setText(cutTextMsg[0]);
+        humidTV.setText(cutTextMsg[1]);
+
         mLightBulb.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if(!lightBulbState){
                 if(isChecked){
