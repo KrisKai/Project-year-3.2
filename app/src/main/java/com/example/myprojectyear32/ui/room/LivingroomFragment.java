@@ -68,8 +68,8 @@ public class LivingroomFragment extends Fragment {
                     .addToBackStack(null)
                     .commit();
         });
-        TextView sensorTV = view.findViewById(R.id.sensorTV);
-        TextView sensorTV = view.findViewById(R.id.sensorTV);
+        TextView tempTV = view.findViewById(R.id.sensorTV);
+        TextView humidTV = view.findViewById(R.id.humidTV);
 
         SessionManager session = new SessionManager(getContext());
         HashMap<String,String> userDetails = session.getUserDetailFromSession();
@@ -170,7 +170,8 @@ public class LivingroomFragment extends Fragment {
                     String message = MQTTPublisher.msg;
                     if(message.contains("Temp")){
                         String[] cutText = message.split(" ");
-                        sensorTV.setText(message);
+                        tempTV.setText(cutText[0]);
+                        humidTV.setText(cutText[1]);
                     }
                     Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                 },6000);
