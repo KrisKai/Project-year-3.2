@@ -184,7 +184,7 @@ public class LivingroomFragment extends Fragment {
                     if(message.contains("Temp")){
                         String[] cutText = message.split("\\s+");
                         String[] temp = cutText[0].split("=");
-                        String[] humidity = cutText[0].split("=");
+                        String[] humidity = cutText[1].split("=");
                         tempTV.setText(temp[1]);
                         humidTV.setText(humidity[1]);
                         statusReference.child("sensor").setValue(message);
