@@ -66,7 +66,6 @@ public class BotResponse {
         }
 
         if (message.contains("bật")&&message.contains("đèn")) {
-//
             if(message.contains("phòng")){
                     outmessage = "Đang bật đèn..";
                     MQTTPublisher.Connect(context, "192.168.1.200:1883");
@@ -77,6 +76,20 @@ public class BotResponse {
             }
             else {
                 outmessage = "Bạn muốn bật đèn phòng nào ?";
+                //Do sth
+            }
+        }
+        if (message.contains("tắt")&&message.contains("đèn")) {
+            if(message.contains("phòng")){
+                outmessage = "Đang tắt đèn..";
+                MQTTPublisher.Connect(context, "192.168.1.200:1883");
+                new Handler().postDelayed(() -> {
+                    //do sth
+                    MQTTPublisher.Publisher("led_off");
+                },1000);
+            }
+            else {
+                outmessage = "Bạn muốn tắt đèn phòng nào ?";
                 //Do sth
             }
         }
@@ -93,19 +106,34 @@ public class BotResponse {
         }
         // Open the door
         if (message.contains("mở")&&message.contains("cửa")) {
-                    if(message.contains("phòng")){
-                            outmessage = "Đang mở cửa..";
-                            MQTTPublisher.Connect(context, "192.168.1.200:1883");
-                            new Handler().postDelayed(() -> {
-                                //do sth
-                                MQTTPublisher.Publisher("door_open");
-                            },1000);
-                    }
-                    else {
-                        outmessage = "Bạn muốn mở cửa phòng nào ?";
-                        //Do sth
-                    }
-                }
+            if(message.contains("phòng")){
+                outmessage = "Đang mở cửa..";
+                MQTTPublisher.Connect(context, "192.168.1.200:1883");
+                new Handler().postDelayed(() -> {
+                    //do sth
+                    MQTTPublisher.Publisher("door_open");
+                },1000);
+            }
+            else {
+                outmessage = "Bạn muốn mở cửa phòng nào ?";
+                //Do sth
+            }
+        }
+
+        if (message.contains("đóng")&&message.contains("cửa")) {
+            if(message.contains("phòng")){
+                outmessage = "Đang đóng cửa..";
+                MQTTPublisher.Connect(context, "192.168.1.200:1883");
+                new Handler().postDelayed(() -> {
+                    //do sth
+                    MQTTPublisher.Publisher("door_off");
+                },1000);
+            }
+            else {
+                outmessage = "Bạn muốn đóng cửa phòng nào ?";
+                //Do sth
+            }
+        }
 
         if (message.contains("flip") && message.contains("coin")) {
             result = random == 0 ? "heads" : "tails";
