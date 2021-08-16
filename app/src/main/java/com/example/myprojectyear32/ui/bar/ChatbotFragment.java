@@ -196,7 +196,6 @@ public class ChatbotFragment extends Fragment {
                         String message = MQTTPublisher.msg;
                         String response = message;
                         if(message.contains("Temp")){
-
                             botResponse(response);
                             speak(response);
                         }else{
