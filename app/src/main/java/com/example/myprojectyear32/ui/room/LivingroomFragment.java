@@ -169,9 +169,9 @@ public class LivingroomFragment extends Fragment {
                 new Handler().postDelayed(() -> {
                     String message = MQTTPublisher.msg;
                     if(message.contains("Temp")){
-                        String[] cutText = message.split(" ");
+                        String[] cutText = message.split("\\s+");
                         tempTV.setText(cutText[0]);
-                        humidTV.setText(cutText[3]);
+                        humidTV.setText(cutText[1]);
                     }
                     Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                 },6000);
