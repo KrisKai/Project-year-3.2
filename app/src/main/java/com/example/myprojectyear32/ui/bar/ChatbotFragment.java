@@ -264,7 +264,6 @@ public class ChatbotFragment extends Fragment {
                         speak(response);
                     }
                     if((msgSTT.contains("phòng")&&storedStrForSensor.contains("nhiệt"))||(msgSTT.contains("phòng")&&msgSTT.contains("nhiệt"))){
-                        storedChatForSensor(result.get(0),storedStatusForSensor);
 
                         MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
                         new Handler().postDelayed(() -> {
