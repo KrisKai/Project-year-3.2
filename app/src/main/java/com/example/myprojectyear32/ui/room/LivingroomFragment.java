@@ -98,7 +98,7 @@ public class LivingroomFragment extends Fragment {
         String[] cutTextMsg = mSensorStatus.split("\\s+");
 
         String[] tempF = cutTextMsg[0].split("=");
-        String[] humidityF = cutTextMsg[0].split("=");
+        String[] humidityF = cutTextMsg[1].split("=");
         tempTV.setText(tempF[1]);
         humidTV.setText(humidityF[1]);
 
