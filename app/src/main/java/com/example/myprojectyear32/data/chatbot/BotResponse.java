@@ -38,7 +38,7 @@ public class BotResponse {
         final String[] tmp = new String[1];
         switch(random) {
             case 0:
-                outmessage = "Tôi không hiểu...";
+                outmessage = "Tôi không hiểu";
                 break;
             case 1:
                 outmessage = "Thử nói cái gì khác";
