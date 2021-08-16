@@ -104,7 +104,6 @@ public class LivingroomFragment extends Fragment {
                     notification.setTime(date);
 
                     notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
-                    Toast.makeText(getActivity(), notification.getDescription(), Toast.LENGTH_SHORT).show();
                     statusReference.child("lighting").setValue("True");
                     MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
                     new Handler().postDelayed(() -> {
@@ -118,7 +117,6 @@ public class LivingroomFragment extends Fragment {
                         MQTTPublisher.Publisher("led_off");
                     },1000);
                     statusReference.child("lighting").setValue("False");
-                    Toast.makeText(getActivity(), "Tắt đèn phòng khách", Toast.LENGTH_SHORT).show();
                 }
             }else {
                 lightBulbState = false;
@@ -134,7 +132,6 @@ public class LivingroomFragment extends Fragment {
                     notification.setTime(date);
 
                     notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
-                    Toast.makeText(getActivity(), notification.getDescription(), Toast.LENGTH_SHORT).show();
                     statusReference.child("door").setValue("True");
                     MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
                     new Handler().postDelayed(() -> {
@@ -147,7 +144,6 @@ public class LivingroomFragment extends Fragment {
                         //do sth
                         MQTTPublisher.Publisher("door_oFFn");
                     },1000);
-                    Toast.makeText(getActivity(), "Đóng cửa phòng khách", Toast.LENGTH_SHORT).show();
                     statusReference.child("door").setValue("False");
                 }
             } else {
@@ -173,13 +169,10 @@ public class LivingroomFragment extends Fragment {
                         String[] cutText = message.split("\\s+");
                         tempTV.setText(cutText[0]);
                         humidTV.setText(cutText[1]);
+                        statusReference.child("lighting").setValue(message);
                     }
-                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                 },6000);
             },1000);
-
-
-
         });
 
         notiReference = FirebaseDatabase.getInstance().getReference().child("User").child(userName).child("Notification");
