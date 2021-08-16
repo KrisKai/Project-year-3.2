@@ -217,12 +217,12 @@ public class ChatbotFragment extends Fragment {
                 speak(response);
             }
             recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
-        } else {
+        }
+        else {
             Message inputMessage = new Message();
             inputMessage.setMessage(inputmessage);
             inputMessage.setId("100");
             this.initialRequest = false;
-
         }
         this.inputMessage.setText("");
     }
