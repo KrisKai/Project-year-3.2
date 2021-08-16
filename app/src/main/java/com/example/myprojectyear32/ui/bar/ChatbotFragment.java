@@ -234,6 +234,7 @@ public class ChatbotFragment extends Fragment {
         mAdapter.notifyDataSetChanged();
 
     }
+    //Data gets from Speech to text
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -245,6 +246,7 @@ public class ChatbotFragment extends Fragment {
                     Message inputMessage = new Message();
                     inputMessage.setMessage(result.get(0));
                     inputMessage.setId("1");
+                    String msgSTT = result.get(0);
                     messageArrayList.add(inputMessage);
                     recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
                     if(result.get(0).contains("đèn")||(result.get(0).contains("phòng")&&storedStrForLed.contains("đèn"))){
@@ -254,14 +256,14 @@ public class ChatbotFragment extends Fragment {
                         botResponse(response);
                         speak(response);
                     }
-                    if(result.get(0).contains("nhiệt")&&!result.get(0).contains("phòng")){
+                    if(msgSTT.contains("nhiệt")&&!msgSTT.contains("phòng")&&!storedStrForSensor.contains("phòng")){
                         storedChatForSensor(result.get(0),storedStatusForSensor);
                         BotResponse botResponse = new BotResponse(storedStrForSensor);
                         String response = botResponse.basicResponses(getContext());
                         botResponse(response);
                         speak(response);
                     }
-                    if(result.get(0).contains("phòng")&&storedStrForSensor.contains("nhiệt")){
+                    if((msgSTT.contains("phòng")&&storedStrForSensor.contains("nhiệt"))||(msgSTT.contains("phòng")&&msgSTT.contains("nhiệt"))){
                         storedChatForSensor(result.get(0),storedStatusForSensor);
 
                         MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
