@@ -303,7 +303,7 @@ public class ChatbotFragment extends Fragment {
 
     private void storedChatForLed(String message, boolean status){
         if(!status){
-            if(message.contains("bật")&&message.contains("đèn")&&!message.contains("phòng")){
+            if(message.contains("đèn")&&!message.contains("phòng")){
                 storedStrForLed = message;
                 storedStatusForLed = true;
             }else{
@@ -333,7 +333,7 @@ public class ChatbotFragment extends Fragment {
     }
     private void storedChatForDoor(String message, boolean status){
         if(!status){
-            if(message.contains("mở")&&message.contains("cửa")&&!message.contains("phòng")){
+            if(message.contains("cửa")&&!message.contains("phòng")){
                 storedStrForDoor = message;
                 storedStatusForDoor = true;
             }else{
