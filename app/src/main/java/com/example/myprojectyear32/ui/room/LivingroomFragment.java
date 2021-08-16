@@ -42,9 +42,7 @@ public class LivingroomFragment extends Fragment {
     private String date;
     private long maxID=0;
     private boolean doorState = false;
-    private boolean fanState = false;
     private boolean lightBulbState = false;
-    private boolean sensorState = false;
 
     public LivingroomFragment() {
         // Required empty public constructor
@@ -76,15 +74,7 @@ public class LivingroomFragment extends Fragment {
         String userName = userDetails.get(SessionManager.KEY_USERNAME);
         String mLightBulbStatus = userDetails.get(SessionManager.KEY_LIGHTINGLR);
         String mDoorStatus = userDetails.get(SessionManager.KEY_DOORLR);
-        String mFanStatus = userDetails.get(SessionManager.KEY_FANLR);
         String mSensorStatus = userDetails.get(SessionManager.KEY_SENSORLR);
-
-        mSensor = view.findViewById(R.id.sensorLRCard);
-
-        TextView mSensorTV = view.findViewById(R.id.sensorTV);
-        mSensorTV.setText(mSensorStatus);
-
-
 
         mLightBulb = view.findViewById(R.id.lightLRswitch);
         if(mLightBulbStatus.equals("True")){
@@ -121,6 +111,11 @@ public class LivingroomFragment extends Fragment {
                         MQTTPublisher.Publisher("led_on");
                     },1000);
                 } else {
+                    MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
+                    new Handler().postDelayed(() -> {
+                        //do sth
+                        MQTTPublisher.Publisher("led_off");
+                    },1000);
                     statusReference.child("lighting").setValue("False");
                     Toast.makeText(getActivity(), "Tắt đèn phòng khách", Toast.LENGTH_SHORT).show();
                 }
@@ -146,6 +141,11 @@ public class LivingroomFragment extends Fragment {
                         MQTTPublisher.Publisher("door_open");
                     },1000);
                 } else {
+                    MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
+                    new Handler().postDelayed(() -> {
+                        //do sth
+                        MQTTPublisher.Publisher("door_oFFn");
+                    },1000);
                     Toast.makeText(getActivity(), "Đóng cửa phòng khách", Toast.LENGTH_SHORT).show();
                     statusReference.child("door").setValue("False");
                 }
