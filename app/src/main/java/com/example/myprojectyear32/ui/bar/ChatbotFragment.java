@@ -249,13 +249,12 @@ public class ChatbotFragment extends Fragment {
                     String msgSTT = result.get(0);
                     messageArrayList.add(inputMessage);
                     recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
-                    if(result.get(0).contains("đèn")||(result.get(0).contains("phòng")&&storedStrForLed.contains("đèn"))){
+                    if(result.get(0).contains("đèn")||(result.get(0).contains("phòng")&&storedStrForLed.contains("đèn")&&!storedStrForSensor.contains("nhiệt"))){
                         storedChatForLed(result.get(0),storedStatusForLed);
                         BotResponse botResponse = new BotResponse(storedStrForLed);
                         String response = botResponse.basicResponses(getContext());
                         botResponse(response);
                         speak(response);
-                        storedStrForLed = "message for led";
                     }
                     if(msgSTT.contains("nhiệt")&&!msgSTT.contains("phòng")&&!storedStrForSensor.contains("phòng")){
                         storedChatForSensor(result.get(0),storedStatusForSensor);
@@ -289,13 +288,12 @@ public class ChatbotFragment extends Fragment {
                         },1000);
                         storedStrForSensor = "message for sensor";
                     }
-                    if(result.get(0).contains("cửa")||(result.get(0).contains("phòng")&&storedStrForDoor.contains("cửa"))){
+                    if(result.get(0).contains("cửa")||(result.get(0).contains("phòng")&&storedStrForDoor.contains("cửa")&&!storedStrForSensor.contains("nhiệt"))){
                         storedChatForDoor(result.get(0),storedStatusForDoor);
                         BotResponse botResponse = new BotResponse(storedStrForDoor);
                         String response = botResponse.basicResponses(getContext());
                         botResponse(response);
                         speak(response);
-                        storedStrForDoor = "message for door";
                     }
                 }
                 break;
