@@ -14,7 +14,6 @@
 
         <!-- TODO: Update blank fragment layout -->
 
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floatingActionButtonLR"
             android:layout_marginTop="20dp"
@@ -50,7 +49,7 @@
             app:layout_constraintVertical_bias="0.206" />
 
         <GridLayout
-            android:layout_marginTop="130dp"
+            android:layout_marginTop="140dp"
             android:columnCount="2"
             android:rowCount="1"
             android:layout_marginLeft="20dp"
