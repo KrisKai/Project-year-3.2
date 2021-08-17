@@ -255,6 +255,7 @@ public class ChatbotFragment extends Fragment {
                         String response = botResponse.basicResponses(getContext());
                         botResponse(response);
                         speak(response);
+                        storedStrForLed = "message for led";
                     }
                     if(msgSTT.contains("nhiệt")&&!msgSTT.contains("phòng")&&!storedStrForSensor.contains("phòng")){
                         storedChatForSensor(result.get(0),storedStatusForSensor);
@@ -286,6 +287,7 @@ public class ChatbotFragment extends Fragment {
                                 Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                             },6000);
                         },1000);
+                        storedStrForSensor = "message for sensor";
                     }
                     if(result.get(0).contains("cửa")||(result.get(0).contains("phòng")&&storedStrForDoor.contains("cửa"))){
                         storedChatForDoor(result.get(0),storedStatusForDoor);
@@ -293,6 +295,7 @@ public class ChatbotFragment extends Fragment {
                         String response = botResponse.basicResponses(getContext());
                         botResponse(response);
                         speak(response);
+                        storedStrForDoor = "message for door";
                     }
                 }
                 break;
