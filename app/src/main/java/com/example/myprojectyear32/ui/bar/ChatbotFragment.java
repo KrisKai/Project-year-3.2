@@ -177,14 +177,14 @@ public class ChatbotFragment extends Fragment {
                 botResponse(response);
                 speak(response);
             }
-            if(inputmessage.contains("nhiệt")&&!storedStrForSensor.contains("phòng")){
+            if(inputmessage.contains("nhiệt")&&!storedStrForSensor.contains("phòng")&&!inputmessage.contains("phòng")){
                 storedChatForSensor(inputmessage,storedStatusForSensor);
                 BotResponse botResponse = new BotResponse(storedStrForSensor);
                 String response = botResponse.basicResponses(getContext());
                 botResponse(response);
                 speak(response);
             }
-            if(inputmessage.contains("phòng")&&storedStrForSensor.contains("nhiệt")){
+            if(inputmessage.contains("phòng")&&storedStrForSensor.contains("nhiệt")||(inputmessage.contains("phòng")&&inputmessage.contains("nhiệt"))){
                 storedChatForSensor(inputmessage,storedStatusForSensor);
                 MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
                 new Handler().postDelayed(() -> {
