@@ -250,12 +250,15 @@ public class ChatbotFragment extends Fragment {
                     String msgSTT = result.get(0).toLowerCase();
                     messageArrayList.add(inputMessage);
                     recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
-                    if(msgSTT.contains("đèn")||(msgSTT.contains("phòng")&&storedStrForLed.contains("đèn")&&!storedStrForSensor.contains("nhiệt")&&!storedStrForDoor.contains("cửa"))){
+                    if(msgSTT.contains("đèn")||(msgSTT.contains("phòng")&&storedStrForLed.contains("đèn")&&!storedStrForSensor.contains("nhiệt"))){
                         storedChatForLed(msgSTT,storedStatusForLed);
                         BotResponse botResponse = new BotResponse(storedStrForLed);
                         String response = botResponse.basicResponses(getContext());
                         botResponse(response);
                         speak(response);
+                        if(response.contains("Đang")){
+                            storedStrForLed = "";
+                        }
                         Toast.makeText(getContext(),"1 ",Toast.LENGTH_SHORT).show();
                     }
                     if(msgSTT.contains("nhiệt")&&!msgSTT.contains("phòng")&&!storedStrForSensor.contains("phòng")){
@@ -289,13 +292,15 @@ public class ChatbotFragment extends Fragment {
                         },1000);
                         storedStrForSensor = "message for sensor";
                     }
-                    if(msgSTT.contains("cửa")||(msgSTT.contains("phòng")&&storedStrForDoor.contains("cửa")&&!storedStrForSensor.contains("nhiệt")&&!storedStrForLed.contains("đèn"))){
+                    if(msgSTT.contains("cửa")||(msgSTT.contains("phòng")&&storedStrForDoor.contains("cửa")&&!storedStrForSensor.contains("nhiệt"))){
                         storedChatForDoor(msgSTT,storedStatusForDoor);
                         BotResponse botResponse = new BotResponse(storedStrForDoor);
                         String response = botResponse.basicResponses(getContext());
                         botResponse(response);
                         speak(response);
-                        Toast.makeText(getContext(),"2",Toast.LENGTH_SHORT).show();
+                        if(response.contains("Đang")){
+                            storedStrForDoor = "";
+                        }
                     }
                 }
                 break;
