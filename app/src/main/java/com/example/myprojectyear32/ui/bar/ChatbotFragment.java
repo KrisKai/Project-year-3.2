@@ -28,8 +28,10 @@ import com.example.myprojectyear32.data.chatbot.BotResponse;
 import com.example.myprojectyear32.data.chatbot.ChatAdapter;
 import com.example.myprojectyear32.data.chatbot.Message;
 import com.example.myprojectyear32.data.mqtt.MQTTPublisher;
+import com.example.myprojectyear32.session.SessionManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Locale;
 
 public class ChatbotFragment extends Fragment {
@@ -171,6 +173,9 @@ public class ChatbotFragment extends Fragment {
             inputMessage.setId("1");
             messageArrayList.add(inputMessage);
             String input = inputmessage.toLowerCase();
+            SessionManager session = new SessionManager(getContext());
+            HashMap<String,String> userDetails = session.getUserDetailFromSession();
+            String connStatus = userDetails.get(SessionManager.KEY_CONNECTION);
             if(input.contains("đèn")||(input.contains("phòng")&&storedStrForLed.contains("đèn")&&!storedStrForSensor.contains("nhiệt"))){
                 storedChatForLed(input,storedStatusForLed);
                 BotResponse botResponse = new BotResponse(storedStrForLed);
@@ -187,7 +192,7 @@ public class ChatbotFragment extends Fragment {
             }
             if(input.contains("phòng")&&storedStrForSensor.contains("nhiệt")||(input.contains("phòng")&&input.contains("nhiệt"))){
                 storedChatForSensor(input,storedStatusForSensor);
-                MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
+                MQTTPublisher.Connect(getContext(), connStatus);
                 new Handler().postDelayed(() -> {
                     //do sth
                     MQTTPublisher.Subcriber("living");
@@ -243,7 +248,9 @@ public class ChatbotFragment extends Fragment {
             case 10:
                 if (resultCode == MainActivity.RESULT_OK && data != null) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-
+                    SessionManager session = new SessionManager(getContext());
+                    HashMap<String,String> userDetails = session.getUserDetailFromSession();
+                    String connStatus = userDetails.get(SessionManager.KEY_CONNECTION);
                     Message inputMessage = new Message();
                     inputMessage.setMessage(result.get(0));
                     inputMessage.setId("1");
@@ -270,7 +277,7 @@ public class ChatbotFragment extends Fragment {
                     }
                     if((msgSTT.contains("phòng")&&storedStrForSensor.contains("nhiệt"))||(msgSTT.contains("phòng")&&msgSTT.contains("nhiệt"))){
 
-                        MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
+                        MQTTPublisher.Connect(getContext(), connStatus);
                         new Handler().postDelayed(() -> {
                             //do sth
                             MQTTPublisher.Subcriber("living");
