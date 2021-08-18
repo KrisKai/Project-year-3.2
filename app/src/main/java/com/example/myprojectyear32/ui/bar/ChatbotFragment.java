@@ -170,7 +170,7 @@ public class ChatbotFragment extends Fragment {
             inputMessage.setMessage(inputmessage);
             inputMessage.setId("1");
             messageArrayList.add(inputMessage);
-            if(inputmessage.contains("đèn")||(inputmessage.contains("phòng")&&storedStrForLed.contains("đèn"))){
+            if(inputmessage.contains("đèn")||(inputmessage.contains("phòng")&&storedStrForLed.contains("đèn")&&!storedStrForSensor.contains("nhiệt"))){
                 storedChatForLed(inputmessage,storedStatusForLed);
                 BotResponse botResponse = new BotResponse(storedStrForLed);
                 String response = botResponse.basicResponses(getContext());
@@ -207,7 +207,7 @@ public class ChatbotFragment extends Fragment {
                     },10000);
                 },1000);
             }
-            if(inputmessage.contains("cửa")||(inputmessage.contains("phòng")&&storedStrForDoor.contains("cửa"))){
+            if(inputmessage.contains("cửa")||(inputmessage.contains("phòng")&&storedStrForDoor.contains("cửa")&&!storedStrForSensor.contains("nhiệt"))){
                 storedChatForDoor(inputmessage,storedStatusForDoor);
                 BotResponse botResponse = new BotResponse(storedStrForDoor);
                 String response = botResponse.basicResponses(getContext());
@@ -249,7 +249,7 @@ public class ChatbotFragment extends Fragment {
                     String msgSTT = result.get(0);
                     messageArrayList.add(inputMessage);
                     recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
-                    if(result.get(0).contains("đèn")||(result.get(0).contains("phòng")&&storedStrForLed.contains("đèn")&&!storedStrForSensor.contains("nhiệt"))){
+                    if(result.get(0).contains("đèn")||(result.get(0).contains("phòng")&&storedStrForLed.contains("đèn")&&!storedStrForSensor.contains("nhiệt")&&!storedStrForDoor.contains("cửa"))){
                         storedChatForLed(result.get(0),storedStatusForLed);
                         BotResponse botResponse = new BotResponse(storedStrForLed);
                         String response = botResponse.basicResponses(getContext());
@@ -275,7 +275,6 @@ public class ChatbotFragment extends Fragment {
                                 String message = MQTTPublisher.msg;
                                 String response = message;
                                 if(message.contains("Temp")){
-
                                     botResponse(response);
                                     speak(response);
                                 }else{
@@ -288,7 +287,7 @@ public class ChatbotFragment extends Fragment {
                         },1000);
                         storedStrForSensor = "message for sensor";
                     }
-                    if(result.get(0).contains("cửa")||(result.get(0).contains("phòng")&&storedStrForDoor.contains("cửa")&&!storedStrForSensor.contains("nhiệt"))){
+                    if(result.get(0).contains("cửa")||(result.get(0).contains("phòng")&&storedStrForDoor.contains("cửa")&&!storedStrForSensor.contains("nhiệt")&&!storedStrForLed.contains("đèn"))){
                         storedChatForDoor(result.get(0),storedStatusForDoor);
                         BotResponse botResponse = new BotResponse(storedStrForDoor);
                         String response = botResponse.basicResponses(getContext());
