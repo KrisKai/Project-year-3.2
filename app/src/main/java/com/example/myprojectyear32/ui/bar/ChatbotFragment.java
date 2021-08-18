@@ -209,7 +209,6 @@ public class ChatbotFragment extends Fragment {
                             botResponse(response);
                             speak(response);
                         }
-                        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                     },10000);
                 },1000);
             }
@@ -266,7 +265,6 @@ public class ChatbotFragment extends Fragment {
                         if(response.contains("Đang")){
                             storedStrForLed = "";
                         }
-                        Toast.makeText(getContext(),"1 ",Toast.LENGTH_SHORT).show();
                     }
                     if(msgSTT.contains("nhiệt")&&!msgSTT.contains("phòng")&&!storedStrForSensor.contains("phòng")){
                         storedChatForSensor(msgSTT,storedStatusForSensor);
@@ -294,7 +292,6 @@ public class ChatbotFragment extends Fragment {
                                     botResponse(response);
                                     speak(response);
                                 }
-                                Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                             },6000);
                         },1000);
                         storedStrForSensor = "message for sensor";
