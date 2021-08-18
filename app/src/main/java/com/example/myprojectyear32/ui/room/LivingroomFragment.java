@@ -73,6 +73,7 @@ public class LivingroomFragment extends Fragment {
         SessionManager session = new SessionManager(getContext());
         HashMap<String,String> userDetails = session.getUserDetailFromSession();
         String userName = userDetails.get(SessionManager.KEY_USERNAME);
+        String mCode = userDetails.get(SessionManager.KEY_CONNECTION);
         String mLightBulbStatus = userDetails.get(SessionManager.KEY_LIGHTINGLR);
         String mDoorStatus = userDetails.get(SessionManager.KEY_DOORLR);
         String mSensorStatus = userDetails.get(SessionManager.KEY_SENSORLR);
@@ -112,7 +113,7 @@ public class LivingroomFragment extends Fragment {
 
                     notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
                     statusReference.child("lighting").setValue("True");
-                    MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
+                    MQTTPublisher.Connect(getContext(), mCode);
                     new Handler().postDelayed(() -> {
                         //do sth
                         MQTTPublisher.Publisher("led_on");
@@ -123,7 +124,7 @@ public class LivingroomFragment extends Fragment {
                     notification.setImage(R.mipmap.lighting);
                     notification.setTime(date);
                     notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
-                    MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
+                    MQTTPublisher.Connect(getContext(), mCode);
                     new Handler().postDelayed(() -> {
                         //do sth
                         MQTTPublisher.Publisher("led_off");
@@ -144,7 +145,7 @@ public class LivingroomFragment extends Fragment {
                     notification.setTime(date);
                     notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
                     statusReference.child("door").setValue("True");
-                    MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
+                    MQTTPublisher.Connect(getContext(), mCode);
                     new Handler().postDelayed(() -> {
                         //do sth
                         MQTTPublisher.Publisher("door_open");
@@ -155,7 +156,7 @@ public class LivingroomFragment extends Fragment {
                     notification.setImage(R.mipmap.sensor);
                     notification.setTime(date);
                     notiReference.child(String.valueOf(maxID + 1)).setValue(notification);
-                    MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
+                    MQTTPublisher.Connect(getContext(), mCode);
                     new Handler().postDelayed(() -> {
                         //do sth
                         MQTTPublisher.Publisher("door_close");
@@ -173,7 +174,7 @@ public class LivingroomFragment extends Fragment {
             notification.setDescription("Cập nhập nhiệt độ phòng.");
             notification.setImage(R.mipmap.sensor);
             notification.setTime(date);
-            MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
+            MQTTPublisher.Connect(getContext(), mCode);
             new Handler().postDelayed(() -> {
                 //do sth
                 MQTTPublisher.Subcriber("living");

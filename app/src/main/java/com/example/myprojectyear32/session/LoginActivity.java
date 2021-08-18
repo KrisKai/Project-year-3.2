@@ -101,7 +101,6 @@ public class LoginActivity extends AppCompatActivity {
                     String dob = snapshot.child(username).child("DoB").getValue(String.class);
                     String connectCode = snapshot.child(username).child("connectCode").getValue(String.class);
                     String lightingLR = snapshot.child(username).child("Status").child("LivingRoom").child("lighting").getValue(String.class);
-                    String fanLR = snapshot.child(username).child("Status").child("LivingRoom").child("fan").getValue(String.class);
                     String doorLR = snapshot.child(username).child("Status").child("LivingRoom").child("door").getValue(String.class);
                     String sensorLR = snapshot.child(username).child("Status").child("LivingRoom").child("sensor").getValue(String.class);
 
@@ -110,7 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                     if(systemPassword.equals(password)){
                         SessionManager session = new SessionManager(LoginActivity.this);
                         session.createLoginSession(username, password,firstname, lastname, phonenumber, email, dob, gender, connectCode);
-                        session.createStatus(doorLR, fanLR, lightingLR, sensorLR);
+                        session.createStatus(doorLR, lightingLR, sensorLR);
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(intent);
                     } else {

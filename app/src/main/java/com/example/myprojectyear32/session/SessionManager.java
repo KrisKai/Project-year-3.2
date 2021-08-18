@@ -20,7 +20,6 @@ public class SessionManager {
     public static final String KEY_GENDER = "gender";
     public static final String KEY_CONNECTION = "connection";
     public static final String KEY_LIGHTINGLR = "lightLR";
-    public static final String KEY_FANLR = "fanLR";
     public static final String KEY_DOORLR = "doorLR";
     public static final String KEY_SENSORLR = "sensorLR";
 
@@ -51,9 +50,8 @@ public class SessionManager {
         editor.commit();
     }
 
-    public void createStatus(String doorLR, String fanLR, String lightingLR, String sensorLR){
+    public void createStatus(String doorLR, String lightingLR, String sensorLR){
         editor.putString(KEY_DOORLR,doorLR);
-        editor.putString(KEY_FANLR,fanLR);
         editor.putString(KEY_LIGHTINGLR,lightingLR);
         editor.putString(KEY_SENSORLR,sensorLR);
         editor.commit();
@@ -72,7 +70,6 @@ public class SessionManager {
         userData.put(KEY_CONNECTION,preferences.getString(KEY_CONNECTION,null));
         userData.put(KEY_DOORLR,preferences.getString(KEY_DOORLR,null));
         userData.put(KEY_LIGHTINGLR,preferences.getString(KEY_LIGHTINGLR,null));
-        userData.put(KEY_FANLR,preferences.getString(KEY_FANLR,null));
         userData.put(KEY_SENSORLR,preferences.getString(KEY_SENSORLR,null));
 
         return userData;
