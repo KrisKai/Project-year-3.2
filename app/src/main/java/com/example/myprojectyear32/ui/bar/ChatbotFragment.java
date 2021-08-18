@@ -246,11 +246,11 @@ public class ChatbotFragment extends Fragment {
                     Message inputMessage = new Message();
                     inputMessage.setMessage(result.get(0));
                     inputMessage.setId("1");
-                    String msgSTT = result.get(0);
+                    String msgSTT = result.get(0).toLowerCase();
                     messageArrayList.add(inputMessage);
                     recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
-                    if(result.get(0).contains("đèn")||(result.get(0).contains("phòng")&&storedStrForLed.contains("đèn")&&!storedStrForSensor.contains("nhiệt")&&!storedStrForDoor.contains("cửa"))){
-                        storedChatForLed(result.get(0),storedStatusForLed);
+                    if(msgSTT.contains("đèn")||(msgSTT.contains("phòng")&&storedStrForLed.contains("đèn")&&!storedStrForSensor.contains("nhiệt")&&!storedStrForDoor.contains("cửa"))){
+                        storedChatForLed(msgSTT,storedStatusForLed);
                         BotResponse botResponse = new BotResponse(storedStrForLed);
                         String response = botResponse.basicResponses(getContext());
                         botResponse(response);
@@ -258,7 +258,7 @@ public class ChatbotFragment extends Fragment {
                         Toast.makeText(getContext(),"1 ",Toast.LENGTH_SHORT).show();
                     }
                     if(msgSTT.contains("nhiệt")&&!msgSTT.contains("phòng")&&!storedStrForSensor.contains("phòng")){
-                        storedChatForSensor(result.get(0),storedStatusForSensor);
+                        storedChatForSensor(msgSTT,storedStatusForSensor);
                         BotResponse botResponse = new BotResponse(storedStrForSensor);
                         String response = botResponse.basicResponses(getContext());
                         botResponse(response);
@@ -288,8 +288,8 @@ public class ChatbotFragment extends Fragment {
                         },1000);
                         storedStrForSensor = "message for sensor";
                     }
-                    if(result.get(0).contains("cửa")||(result.get(0).contains("phòng")&&storedStrForDoor.contains("cửa")&&!storedStrForSensor.contains("nhiệt")&&!storedStrForLed.contains("đèn"))){
-                        storedChatForDoor(result.get(0),storedStatusForDoor);
+                    if(msgSTT.contains("cửa")||(msgSTT.contains("phòng")&&storedStrForDoor.contains("cửa")&&!storedStrForSensor.contains("nhiệt")&&!storedStrForLed.contains("đèn"))){
+                        storedChatForDoor(msgSTT,storedStatusForDoor);
                         BotResponse botResponse = new BotResponse(storedStrForDoor);
                         String response = botResponse.basicResponses(getContext());
                         botResponse(response);
