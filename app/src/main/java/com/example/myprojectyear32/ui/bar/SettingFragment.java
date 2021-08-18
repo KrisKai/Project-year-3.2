@@ -96,12 +96,10 @@ public class SettingFragment extends Fragment {
                     if(!connect.equals(mConnection.getText().toString())&&!mConnection.getText().equals("")){
                         session.createConnection(mConnection.getText().toString());
                         reference.child(username).child("connectCode").setValue(mConnection.getText().toString());
-                        MQTTPublisher.Connect(getContext(),mConnection.getText().toString());
+//                        MQTTPublisher.Connect(getContext(),mConnection.getText().toString());
                     }
                     if(mConnection.getText().equals("")) {
                         Toast.makeText(getContext(),"Please type the Server IP",Toast.LENGTH_SHORT).show();
-                    }else {
-                        MQTTPublisher.Connect(getContext(),mConnection.getText().toString());
                     }
                     alertDialog.dismiss();
                     Toast.makeText(getContext(),mConnection.getText().toString(),Toast.LENGTH_SHORT).show();
