@@ -255,6 +255,7 @@ public class ChatbotFragment extends Fragment {
                         String response = botResponse.basicResponses(getContext());
                         botResponse(response);
                         speak(response);
+                        Toast.makeText(getContext(),"1 ",Toast.LENGTH_SHORT).show();
                     }
                     if(msgSTT.contains("nhiệt")&&!msgSTT.contains("phòng")&&!storedStrForSensor.contains("phòng")){
                         storedChatForSensor(result.get(0),storedStatusForSensor);
@@ -293,6 +294,7 @@ public class ChatbotFragment extends Fragment {
                         String response = botResponse.basicResponses(getContext());
                         botResponse(response);
                         speak(response);
+                        Toast.makeText(getContext(),"2",Toast.LENGTH_SHORT).show();
                     }
                 }
                 break;
