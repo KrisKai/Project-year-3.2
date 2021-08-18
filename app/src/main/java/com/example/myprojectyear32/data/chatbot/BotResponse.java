@@ -28,8 +28,7 @@ public class BotResponse {
     public static String basicResponses(Context context) {
         SessionManager session = new SessionManager(context);
         HashMap<String,String> userDetails = session.getUserDetailFromSession();
-        String doorStatus = userDetails.get(SessionManager.KEY_CONNECTION);
-        int maxID = 0;
+        String connStatus = userDetails.get(SessionManager.KEY_CONNECTION);
         final int min = 0;
         final int max = 2;
         final int random = new Random().nextInt((max - min) + 1) + min;
@@ -67,7 +66,7 @@ public class BotResponse {
         if (message.contains("bật")&&message.contains("đèn")) {
             if(message.contains("phòng")){
                     outmessage = "Đang bật đèn..";
-                    MQTTPublisher.Connect(context, "192.168.1.200:1883");
+                    MQTTPublisher.Connect(context, connStatus);
                     new Handler().postDelayed(() -> {
                         //do sth
                         MQTTPublisher.Publisher("led_on");
@@ -81,7 +80,7 @@ public class BotResponse {
         if (message.contains("tắt")&&message.contains("đèn")) {
             if(message.contains("phòng")){
                 outmessage = "Đang tắt đèn..";
-                MQTTPublisher.Connect(context, "192.168.1.200:1883");
+                MQTTPublisher.Connect(context, connStatus);
                 new Handler().postDelayed(() -> {
                     //do sth
                     MQTTPublisher.Publisher("led_off");
@@ -107,7 +106,7 @@ public class BotResponse {
         if (message.contains("mở")&&message.contains("cửa")) {
             if(message.contains("phòng")){
                 outmessage = "Đang mở cửa..";
-                MQTTPublisher.Connect(context, "192.168.1.200:1883");
+                MQTTPublisher.Connect(context, connStatus);
                 new Handler().postDelayed(() -> {
                     //do sth
                     MQTTPublisher.Publisher("door_open");
@@ -122,7 +121,7 @@ public class BotResponse {
         if (message.contains("đóng")&&message.contains("cửa")) {
             if(message.contains("phòng")){
                 outmessage = "Đang đóng cửa..";
-                MQTTPublisher.Connect(context, "192.168.1.200:1883");
+                MQTTPublisher.Connect(context, connStatus);
                 new Handler().postDelayed(() -> {
                     //do sth
                     MQTTPublisher.Publisher("door_close");
