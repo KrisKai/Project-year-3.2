@@ -28,7 +28,7 @@ public class BotResponse {
     public static String basicResponses(Context context) {
         SessionManager session = new SessionManager(context);
         HashMap<String,String> userDetails = session.getUserDetailFromSession();
-        String doorStatus = userDetails.get(SessionManager.KEY_DOORLR);
+        String doorStatus = userDetails.get(SessionManager.KEY_CONNECTION);
         int maxID = 0;
         final int min = 0;
         final int max = 2;
