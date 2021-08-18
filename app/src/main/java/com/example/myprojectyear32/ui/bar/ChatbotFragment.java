@@ -170,22 +170,23 @@ public class ChatbotFragment extends Fragment {
             inputMessage.setMessage(inputmessage);
             inputMessage.setId("1");
             messageArrayList.add(inputMessage);
-            if(inputmessage.contains("đèn")||(inputmessage.contains("phòng")&&storedStrForLed.contains("đèn")&&!storedStrForSensor.contains("nhiệt"))){
-                storedChatForLed(inputmessage,storedStatusForLed);
+            String input = inputmessage.toLowerCase();
+            if(input.contains("đèn")||(input.contains("phòng")&&storedStrForLed.contains("đèn")&&!storedStrForSensor.contains("nhiệt"))){
+                storedChatForLed(input,storedStatusForLed);
                 BotResponse botResponse = new BotResponse(storedStrForLed);
                 String response = botResponse.basicResponses(getContext());
                 botResponse(response);
                 speak(response);
             }
-            if(inputmessage.contains("nhiệt")&&!storedStrForSensor.contains("phòng")&&!inputmessage.contains("phòng")){
-                storedChatForSensor(inputmessage,storedStatusForSensor);
+            if(input.contains("nhiệt")&&!storedStrForSensor.contains("phòng")&&!input.contains("phòng")){
+                storedChatForSensor(input,storedStatusForSensor);
                 BotResponse botResponse = new BotResponse(storedStrForSensor);
                 String response = botResponse.basicResponses(getContext());
                 botResponse(response);
                 speak(response);
             }
-            if(inputmessage.contains("phòng")&&storedStrForSensor.contains("nhiệt")||(inputmessage.contains("phòng")&&inputmessage.contains("nhiệt"))){
-                storedChatForSensor(inputmessage,storedStatusForSensor);
+            if(input.contains("phòng")&&storedStrForSensor.contains("nhiệt")||(input.contains("phòng")&&input.contains("nhiệt"))){
+                storedChatForSensor(input,storedStatusForSensor);
                 MQTTPublisher.Connect(getContext(), "192.168.1.200:1883");
                 new Handler().postDelayed(() -> {
                     //do sth
@@ -207,8 +208,8 @@ public class ChatbotFragment extends Fragment {
                     },10000);
                 },1000);
             }
-            if(inputmessage.contains("cửa")||(inputmessage.contains("phòng")&&storedStrForDoor.contains("cửa")&&!storedStrForSensor.contains("nhiệt"))){
-                storedChatForDoor(inputmessage,storedStatusForDoor);
+            if(input.contains("cửa")||(input.contains("phòng")&&storedStrForDoor.contains("cửa")&&!storedStrForSensor.contains("nhiệt"))){
+                storedChatForDoor(input,storedStatusForDoor);
                 BotResponse botResponse = new BotResponse(storedStrForDoor);
                 String response = botResponse.basicResponses(getContext());
                 botResponse(response);
